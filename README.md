@@ -5,10 +5,12 @@
 
 * 登录 【done】 
 * 注销 【done】
+* 流量查询 【done】
 * 保存密码
 * 自动登陆
 * 托盘程序
 * 界面美化
+* 配置管理
 * 流量监控
 * 后台服务
 
@@ -18,4 +20,7 @@
 
 ### 作者
 
-NewFuture(@NewFuture)
+@NewFuture
+
+### 开源协议
+Apache2 License
