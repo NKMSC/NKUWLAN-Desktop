@@ -1,0 +1,19 @@
+﻿<Window x:Class="GatewayClient_Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GatewayClient_Desktop"
+        mc:Ignorable="d"
+        Title="南开大学网关登录" Height="350" Width="525">
+    <Grid>
+        <TextBox TextWrapping="Wrap" HorizontalAlignment="Left" Width="87" FontSize="25" FontFamily="PMingLiU" Foreground="#FF150AF0" UndoLimit="5" FontWeight="Bold" Height="35" VerticalAlignment="Top" Margin="0,78,0,0" BorderBrush="{x:Null}" BorderThickness="1,1,1,0" Background="{x:Null}" Text="账号" IsReadOnly="True"/>
+        <TextBox x:Name="UserNameBox" TextWrapping="Wrap" HorizontalAlignment="Left" Width="415" FontSize="25" FontFamily="PMingLiU" Foreground="#FF150AF0" UndoLimit="5" FontWeight="Bold" Height="30" VerticalAlignment="Top" Margin="92,78,0,0" BorderBrush="{x:Null}" BorderThickness="1,1,1,0" Background="#FF43E429"/>
+        <TextBox TextWrapping="Wrap" HorizontalAlignment="Left" Width="87" FontSize="25" FontFamily="PMingLiU" Foreground="#FF150AF0" UndoLimit="5" FontWeight="Bold" Height="35" VerticalAlignment="Top" Margin="0,108,0,0" BorderBrush="{x:Null}" BorderThickness="1,1,1,0" Background="{x:Null}" Text="密码" IsReadOnly="True"/>
+        <PasswordBox x:Name="PwdBox" Margin="92,108,0,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left" Width="415" Background="#A52364D8" KeyDown="PwdBox_KeyDown" FontSize="24" BorderBrush="{x:Null}" BorderThickness="1,0,1,1" ToolTip="回车键快速登录"/>
+        <TextBox TextWrapping="Wrap" HorizontalAlignment="Left" Width="141" FontSize="25" FontFamily="PMingLiU" Foreground="#FF150AF0" UndoLimit="5" FontWeight="Bold" Height="35" VerticalAlignment="Top" Margin="355,147,0,0" BorderBrush="{x:Null}" BorderThickness="1,1,1,0" Background="{x:Null}" Text="回车登录" IsReadOnly="True"/>
+        <TextBox x:Name="InfoBox" TextWrapping="Wrap" HorizontalAlignment="Left" Width="292" FontSize="25" FontFamily="PMingLiU" Foreground="#FF150AF0" UndoLimit="5" FontWeight="Bold" Height="161" VerticalAlignment="Top" Margin="10,148,0,0" BorderBrush="{x:Null}" BorderThickness="1,1,1,0" Background="{x:Null}" IsReadOnly="True"/>
+        <Button x:Name="LogoutButton" Cursor="Hand" Content="注销" ToolTip="注销登陆" BorderThickness="1,0,0,0" Margin="355,240,39,40" Click="LogoutButton_Click"> </Button>
+
+    </Grid>
+</Window>
