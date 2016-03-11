@@ -19,6 +19,23 @@
 根据[https://github.com/NewFuture/NKU-Gateway](https://github.com/NewFuture/NKU-Gateway)
 网关接口修改而成
 
+### 目录结构
+```
+__
+│
+│  GatewayClient-Desktop.sln [VS 2015解决方案]
+│  LICENSE
+│  README.md
+│
+└─GatewayClient-Desktop
+    │
+    │  Config.cs  [配置读写]
+    │  Gateway.cs [网关接口]
+    │  MainWindow.xaml     [界面]
+    │  MainWindow.xaml.cs  [界面响应]
+    │
+```
+
 ### 作者
 
 @NewFuture
