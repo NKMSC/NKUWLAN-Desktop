@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using GatewayClient;
 namespace GatewayClient_Desktop
 {
     /// <summary>
@@ -23,6 +23,20 @@ namespace GatewayClient_Desktop
         public MainWindow()
         {
             InitializeComponent();
+            Gateway.DefaultHost = Config.DefaultHost;
+            Gateway.Timeout = Config.Timeout;
+            
+            getStatus();
+            string uid= Config.UID;
+            string pwd = Config.PWD;
+
+            UserNameBox.Text=uid;
+            PwdBox.Password =pwd;
+            if(!String.IsNullOrEmpty(uid)&&!String.IsNullOrEmpty(pwd))
+            {
+                Login();
+            }
+          
         }
 
         /// <summary>
@@ -35,7 +49,11 @@ namespace GatewayClient_Desktop
             if (e.Key == Key.Enter)
             {
                 PwdBox.Password = PwdBox.Password.Trim();
-              Login();
+                if(Login())
+                {
+                    Config.PWD = PwdBox.Password.Trim();
+                    Config.UID = UserNameBox.Text.Trim();
+                }
             }
         }
 
@@ -43,14 +61,10 @@ namespace GatewayClient_Desktop
         {
             string uid = UserNameBox.Text.Trim();
             string pwd = PwdBox.Password.Trim();
-            if( Gateway.Login(uid, pwd))
+            if (Gateway.Login(uid, pwd))
             {
-               var info= Gateway.Query();
-                InfoBox.Text = "账号:" + info.Uid + "\n"
-                    + "流量:" + info.Flow + "MB\n"
-                    + "余额:" + info.Fee + "￥\n"
-                    + "时间:" + info.Time + "s\n";
-                    return true;
+                getStatus();
+                return true;
             }
             else
             {
@@ -62,6 +76,32 @@ namespace GatewayClient_Desktop
         {
             Gateway.Logout();
             InfoBox.Text = "已注销";
+        }
+
+        private bool getStatus()
+        {
+            var info = Gateway.Info;
+            if (info != null)
+            {
+                InfoBox.Text = "账号:" + ((AccountInfo)info).Uid + "\n"
+                    + "流量:" + ((AccountInfo)info).Flow.ToString("0.0000") + " MB\n"
+                    + "余额:" + ((AccountInfo)info).Fee.ToString("0.00") + " ￥\n"
+                    + "时间:" + ((AccountInfo)info).Time + "s\n";
+                return true;
+            }
+            else
+            {
+                InfoBox.Text = "离线[未登录]";
+                return false;
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Config.UID = null;           
+            Config.PWD = null;
+            PwdBox.Password = null;
+            UserNameBox.Text = null;
         }
     }
 }

@@ -1,10 +1,8 @@
-﻿/*********************************************************************
- * NetWork.cs提供登陆注销网关等相关函数
- * 由NewFuture 
- * 于2013-2-24创建
- *        2-25修改login()
- *        3-3修改
- * *******************************************************************/
+﻿/**********************************************************
+ * Gateway.cs 南开网关接口库
+ * 提供网关登录 查询 注销 等相关接口
+ * 2016-03-10 Created by NewFuture
+ * *******************************************************/
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,78 +11,231 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary>
-/// 提供登录相关方法
-/// </summary>
-namespace GatewayClient_Desktop
+
+namespace GatewayClient
 {
-   public struct Info
-    {
-        /// <summary>
-        /// 账号
-        /// </summary>
-        public string Uid;
-        /// <summary>
-        /// 流量MB
-        /// </summary>
-        public double Flow;
-        /// <summary>
-        /// 余额￥
-        /// </summary>
-        public double Fee;
-        /// <summary>
-        /// 时间s
-        /// </summary>
-        public double Time;
-        public Info(string uid=null, double flow=0,double fee=0,double time=0)
-        {
-            Uid = uid;
-            Flow = flow;
-            Fee = fee;
-            Time = time;
-        }
-    
-    }
+
+    /// <summary>
+    /// 提供登录相关方法
+    /// </summary>
     static class Gateway
     {
         /// <summary>
-        /// host
+        /// 版本
         /// </summary>
-        public const string HOST1 = "http://202.113.18.110";
-        public const string HOST2 = "http://202.113.18.210";
-        public static int TimeOut = 2500;
-        const string sucess_title = @"<title>登录成功</title>";
+        public const string Version = "1.0-beta";
+        /// <summary>
+        /// 超时时间
+        /// </summary>
+        public static int Timeout = 2500;
+
+        /// <summary>
+        /// 获取登录状态和账号信息
+        /// 未登录或在无法获取时返回null
+        /// </summary>
+        public static AccountInfo? Info {
+            get {
+                AccountInfo? info=null;
+                foreach (var host in HostList)
+                {
+                    info= Query(host+query_path);
+                    if(info!=null)
+                    {
+                        return info;
+                    }
+                }
+                return info;
+            }
+        }
+
+
+        /// <summary>
+        /// 获取和设置默认网关
+        /// </summary>
+        public static string DefaultHost
+        {
+            get { return HostList[0]; }
+            set
+            {
+                char[] trimChars = { '\\', '/', ' ', '\n' };
+                if (String.IsNullOrEmpty(value) || value.Trim(trimChars) == HOST_JINNAN)
+                {
+                    //津南网关
+                    hostlist = new List<string>(2);
+                    hostlist.Add(HOST_JINNAN);
+                    hostlist.Add(HOST_BALITAI);
+                }
+                else if (value.Trim(trimChars) == HOST_BALITAI)
+                {
+                    //八里台网关
+                    hostlist = new List<string>(2);
+                    hostlist.Add(HOST_BALITAI);
+                    hostlist.Add(HOST_JINNAN);
+                    
+                }
+                else
+                {
+                    //其他
+                    HostList.Insert(0, value.Trim());
+                }
+            }
+        }
+
+        /// <summary>
+        /// 网关列表，越靠前优先级越高
+        /// </summary>
+        private static List<string> HostList
+        {
+            get
+            {
+                if (hostlist == null)
+                {
+                    DefaultHost = null;         
+                }
+                return hostlist;
+            }
+        }
+        private static List<string> hostlist = null;
+
+        /// <summary>
+        /// 八里台网关
+        /// </summary>
+        public const string HOST_BALITAI = "http://202.113.18.110";
+        /// <summary>
+        /// 津南网关
+        /// </summary>
+        public const string HOST_JINNAN = "http://202.113.18.210";
+
+
         const string query_path = "/";
         const string login_path = ":801/eportal/?c=ACSetting&a=Login";
         const string logout_path = ":801/eportal/?c=ACSetting&a=Logout";
+        const string sucess_title = @"<title>登录成功</title>";
 
-        //    /// <summary>
-        //    /// i网关地址
-        //    /// </summary>
-        //    public static string ipv4_url = "http://202.113.18.188/";
-        ///// <summary>
-        ///// ipv6网关地址
-        ///// </summary>
-        //static public readonly string ipv6_url = "http://ip6.nku.cn/";
 
-        static string pwd;
-        static string uid;
+        private static string pwd = null;
+        private static string uid = null;
 
+        /// <summary>
+        /// 登录网关
+        /// 会遍历主机列表
+        /// </summary>
+        /// <param name="name">账号</param>
+        /// <param name="password">密码</param>
+        /// <returns>返回登录结果</returns>
         static public bool Login(string name, string password)
         {
-         
-            uid = name;
-            pwd = password;
-            string login_url = HOST1 + login_path;
-            var s = postLogin(login_url);
-            if(s.IndexOf(sucess_title)>0)
+            if (!String.IsNullOrEmpty(name))
             {
+                uid = name;
+            }
+            if (!String.IsNullOrEmpty(password))
+            {
+                pwd = password;
+            }
+            return Login();
+        }
+
+        /// <summary>
+        /// 再次登陆
+        /// </summary>
+        /// <returns></returns>
+        public static bool Login()
+        {
+            if (uid != null && pwd != null)
+            {
+                foreach (var host in HostList)
+                {
+                    string login_url = host + login_path;
+                    var s = postLogin(login_url);
+                    if (s.IndexOf(sucess_title) > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+
+        /// <summary>
+        /// 注销网关登陆
+        /// 尝试列表中所有网关进行注销
+        /// </summary>
+        /// <returns>异常返回false</returns>
+        static public bool Logout()
+        {
+            try
+            {
+                HttpWebRequest request;
+                foreach (var host in HostList)
+                {
+                    string url = host + logout_path;
+                    request = (HttpWebRequest)WebRequest.Create(url);
+                    request.Timeout = Timeout;
+                    StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream(), Encoding.GetEncoding("gb2312"));
+                    sr.ReadToEnd();
+                    sr.Close();
+                }
                 return true;
             }
-            else
+            catch
             {
-                s = postLogin(HOST2 + login_path);
-                return s.IndexOf(sucess_title) > 0;
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 获取账户信息
+        /// </summary>
+        /// <param name="url">获取途径</param>
+        /// <returns>查询成功返回账号信息，失败返回null</returns>
+        static private AccountInfo? Query(string url)
+        {
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+            req.Timeout = 3000;
+            try
+            {
+                StreamReader sr = new StreamReader(req.GetResponse().GetResponseStream(), Encoding.GetEncoding("gb2312"));
+                string s = sr.ReadToEnd();
+                sr.Close();
+
+                //查询UID，如果不存在则登录失败
+                int index = s.IndexOf(@"uid='");
+                if (index < 0)
+                {
+                    return null;
+                }
+                AccountInfo info = new AccountInfo();
+                string uid = s.Remove(0, index + 5);
+                uid = uid.Remove(uid.IndexOf(@"'")).Trim();
+                info.Uid = uid;
+
+                //解析登录时长
+                string time = s.Remove(0, s.IndexOf(@"time='") + 6);
+                time = time.Remove(time.IndexOf(@"'")).Trim();
+                Double.TryParse(time, out info.Time);
+
+                //流量，换算单位
+                string s_Flow = s.Remove(0, s.IndexOf(@"flow='") + 6);
+                s_Flow = s_Flow.Remove(s_Flow.IndexOf(@"'")).Trim();
+                if (Double.TryParse(s_Flow, out info.Flow))
+                {
+                    info.Flow /= 1024;
+                }
+
+                //余额
+                string fee = s.Remove(0, s.IndexOf(@"fee='") + 5);
+                fee = fee.Remove(fee.IndexOf(@"'")).Trim();
+                if (Double.TryParse(fee, out info.Fee))
+                {
+                    info.Fee /= 10000;
+                }
+                return info;
+            }
+            catch
+            {
+                return null;
             }
         }
 
@@ -97,12 +248,12 @@ namespace GatewayClient_Desktop
         {
             try
             {
+                //提交表单
                 System.Net.WebRequest post = System.Net.HttpWebRequest.Create(login_url);
-                post.Timeout = TimeOut;
+                post.Timeout = Timeout;
                 post.Method = "POST";
                 post.ContentType = "application/x-www-form-urlencoded";
                 byte[] toout = System.Text.Encoding.UTF8.GetBytes("DDDDD=" + uid + "&upass=" + pwd);
-
                 post.ContentLength = toout.Length;
                 var requeststream = post.GetRequestStream();
                 requeststream.Write(toout, 0, toout.Length);
@@ -113,135 +264,38 @@ namespace GatewayClient_Desktop
             }
             catch (Exception)
             {
-
-                return "";
-            }      
+                return null;
+            }
         }
+    }
 
-        //static public object Query()
-        //{
-
-        //}
-        ///// <summary>
-        ///// 后台登录
-        ///// </summary>
-        ///// <param name="isIpv4"></param>
-        ///// <returns></returns>
-        //static public string LoginBackground(bool isIpv4)
-        //{
-        //    //return Login(usrnm, psswrd);
-        //}
-
+    /// <summary>
+    /// 账号信息
+    /// </summary>
+    public struct AccountInfo
+    {
         /// <summary>
-        /// 注销网关登陆
+        /// 账号
         /// </summary>
-        /// <param name="isIpv4">true表示ipv4，false表示ipv6</param>
-        /// <returns>异常返回false</returns>
-        static public bool Logout()
-        {
-
-            try
-            {
-                string url = HOST1 + logout_path;
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                request.Timeout = TimeOut;
-                StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream(), Encoding.GetEncoding("gb2312"));
-                {
-                    sr.ReadToEnd();
-                    sr.Close();
-                }
-                request = (HttpWebRequest)WebRequest.Create(HOST2+logout_path);
-                sr = new StreamReader(request.GetResponse().GetResponseStream(), Encoding.GetEncoding("gb2312"));
-                {
-                    sr.ReadToEnd();
-                    sr.Close();
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-
-        ///// <summary>
-        ///// 判断是否是未登陆状态
-        ///// </summary>
-        ///// <param name="isIpv4">true为ipv4查询，false为ipv6查询</param>
-        ///// <returns>未登陆返回true，已登陆返回false,链接失败抛出异常</returns>
-        //static bool IsNotLogon()
-        //{
-
-        //    //建立ipv4或者ipv6链接请求
-        //    HttpWebRequest req = (HttpWebRequest)WebRequest.Create();
-        //    req.Timeout = 3000;
-        //    try
-        //    {
-        //        //从网关获取信息
-        //        StreamReader sr = new StreamReader(req.GetResponse().GetResponseStream(), Encoding.GetEncoding("gb2312"));
-        //        string result = sr.ReadToEnd();
-        //        sr.Close();
-        //        return result.Contains("密码");//含有 密码 即未登陆返回true
-        //    }
-        //    catch
-        //    {
-        //        throw;
-        //    }
-        //}
-
-
-        
-        static public Info Query()
-        {
-            return AccountInfo(HOST1);
-        }
-
+        public string Uid;
         /// <summary>
-        /// 获取账户信息
+        /// 流量 单位MB
         /// </summary>
-        /// <param name="url">获取途径</param>
-        /// <returns></returns>
-        static private Info AccountInfo(string url)
+        public double Flow;
+        /// <summary>
+        /// 余额 单位￥
+        /// </summary>
+        public double Fee;
+        /// <summary>
+        /// 时间 单位s
+        /// </summary>
+        public double Time;
+        public AccountInfo(string uid = null, double flow = 0, double fee = 0, double time = 0)
         {
-           
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            req.Timeout = 3000;
-            Info info=new Info();
-            try
-            {
-                StreamReader sr = new StreamReader(req.GetResponse().GetResponseStream(), Encoding.GetEncoding("gb2312"));
-               string s = sr.ReadToEnd();
-
-                string uid = s.Remove(0, s.IndexOf(@"uid='") + 5);
-                uid = uid.Remove(uid.IndexOf(@"'")).Trim();
-                info.Uid = uid;
-
-                string time = s.Remove(0, s.IndexOf(@"time='") + 6);
-                time = time.Remove(time.IndexOf(@"'")).Trim();
-                Double.TryParse(time, out info.Time);
-
-                string s_Flow = s.Remove(0, s.IndexOf(@"flow='") + 6);
-                s_Flow = s_Flow.Remove(s_Flow.IndexOf(@"'")).Trim();
-               if( Double.TryParse(s_Flow, out info.Flow))
-                {
-                    info.Flow /= 1024;
-                }
-
-                string fee = s.Remove(0, s.IndexOf(@"fee='") + 5);
-                fee = fee.Remove(fee.IndexOf(@"'")).Trim();
-               if( Double.TryParse(fee, out info.Fee))
-                {
-                    info.Fee /= 10000;
-                }
-
-                sr.Close();
-                return info;
-            }
-            catch
-            {
-                return info;
-            }
+            Uid = uid;
+            Flow = flow;
+            Fee = fee;
+            Time = time;
         }
     }
 }
