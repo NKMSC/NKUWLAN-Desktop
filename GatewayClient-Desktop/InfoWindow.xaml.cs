@@ -88,7 +88,7 @@ namespace Desktop_GUI
 
         private void hideBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
 
         /// <summary>

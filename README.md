@@ -19,8 +19,8 @@
 根据[NKU-Gateway](https://github.com/NewFuture/NKU-Gateway)
 网关接口修改而成
 
-<<<<<<< HEAD
 登录界面修改自[QQIdea](https://github.com/JsonRuby/QQIdea)
+
 =======
 ### 目录结构
 ```
@@ -38,7 +38,6 @@ __
     │  MainWindow.xaml.cs  [界面响应]
     │
 ```
->>>>>>> origin/master
 
 ### 作者
 
