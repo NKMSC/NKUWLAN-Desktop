@@ -11,7 +11,7 @@ namespace GatewayClient
     /// <summary>
     /// 配置读写
     /// </summary>
-    class Config
+   public static class Config
     {
         public const String PATH = "NKU_Gateway.config.xml";
         public const String VERSION = "1.0";

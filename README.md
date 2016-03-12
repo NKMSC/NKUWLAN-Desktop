@@ -16,8 +16,29 @@
 * 网关账户管理
 
 ### 引用
-根据[https://github.com/NewFuture/NKU-Gateway](https://github.com/NewFuture/NKU-Gateway)
+根据[NKU-Gateway](https://github.com/NewFuture/NKU-Gateway)
 网关接口修改而成
+
+<<<<<<< HEAD
+登录界面修改自[QQIdea](https://github.com/JsonRuby/QQIdea)
+=======
+### 目录结构
+```
+__
+│
+│  GatewayClient-Desktop.sln [VS 2015解决方案]
+│  LICENSE
+│  README.md
+│
+└─GatewayClient-Desktop
+    │
+    │  Config.cs  [配置读写]
+    │  Gateway.cs [网关接口]
+    │  MainWindow.xaml     [界面]
+    │  MainWindow.xaml.cs  [界面响应]
+    │
+```
+>>>>>>> origin/master
 
 ### 作者
 

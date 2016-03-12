@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GatewayClient_Desktop.Properties
+namespace Desktop_GUI.Properties
 {
 
 

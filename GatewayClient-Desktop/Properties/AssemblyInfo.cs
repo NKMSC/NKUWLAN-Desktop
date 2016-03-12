@@ -7,12 +7,12 @@ using System.Windows;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("GatewayClient-Desktop")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Desktop-GUI")]
+[assembly: AssemblyDescription("南开网关登录客户-windows桌面版版")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GatewayClient-Desktop")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCompany("NKMS.CLUB")]
+[assembly: AssemblyProduct("NKUGatewayClient-Desktop")]
+[assembly: AssemblyCopyright("Copyright ©  2016 NewFuture")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -6,10 +6,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 
 namespace GatewayClient
@@ -18,7 +16,7 @@ namespace GatewayClient
     /// <summary>
     /// 提供登录相关方法
     /// </summary>
-    static class Gateway
+   public static class Gateway
     {
         /// <summary>
         /// 版本
@@ -123,7 +121,7 @@ namespace GatewayClient
         /// <param name="name">账号</param>
         /// <param name="password">密码</param>
         /// <returns>返回登录结果</returns>
-        static public bool Login(string name, string password)
+        static public bool? Login(string name, string password)
         {
             if (!String.IsNullOrEmpty(name))
             {
@@ -139,22 +137,47 @@ namespace GatewayClient
         /// <summary>
         /// 再次登陆
         /// </summary>
-        /// <returns></returns>
-        public static bool Login()
+        /// <returns>
+        /// True 登录成功
+        /// False登录失败
+        /// Null 网络错误
+        /// </returns>
+        public static bool? Login()
         {
+            //未指定读取配置
+            if(uid==null&&pwd==null)
+            {
+                uid = Config.UID;
+                pwd = Config.PWD;
+            }
+            bool isNetworkErr = true;
             if (uid != null && pwd != null)
             {
                 foreach (var host in HostList)
                 {
-                    string login_url = host + login_path;
-                    var s = postLogin(login_url);
-                    if (s.IndexOf(sucess_title) > 0)
+                    var s = postLogin(host + login_path);
+                    if(s==null)
+                    {
+                        continue;
+                    }
+                    else if (s.IndexOf(sucess_title) > 0)
                     {
                         return true;
                     }
+                    else
+                    {
+                        isNetworkErr = false;
+                    }
                 }
             }
-            return false;
+            if (isNetworkErr)
+            {
+                return null;
+            }
+            else
+            {
+                return false;
+            }
         }
 
 
@@ -258,8 +281,7 @@ namespace GatewayClient
                 var requeststream = post.GetRequestStream();
                 requeststream.Write(toout, 0, toout.Length);
 
-                var result = (new System.IO.StreamReader(post.GetResponse().GetResponseStream(),
-                                                                  System.Text.Encoding.GetEncoding("GB2312"))).ReadToEnd();
+                var result = (new System.IO.StreamReader(post.GetResponse().GetResponseStream(),System.Text.Encoding.GetEncoding("GB2312"))).ReadToEnd();
                 return result;
             }
             catch (Exception)
