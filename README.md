@@ -31,7 +31,7 @@
 
 登录界面修改自[QQIdea](https://github.com/JsonRuby/QQIdea)
 
-图标 修改自网络南开表情包![](GatewayClient-Desktop\images\logo256.png)
+图标 修改自网络南开表情包![](GatewayClient-Desktop/images/logo_256.png)
 
 ### 目录结构
 ```
