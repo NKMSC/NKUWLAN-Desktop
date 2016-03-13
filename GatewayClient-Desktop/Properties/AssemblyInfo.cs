@@ -7,8 +7,8 @@ using System.Windows;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("NKUGatewayClient-GUI")]
-[assembly: AssemblyDescription("南开网关登录客户-windows桌面版版")]
+[assembly: AssemblyTitle("网关登录客windows桌面版")]
+[assembly: AssemblyDescription("南开网关登录客户端-windows桌面版 NKU_Wlan")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("NKMS.CLUB")]
 [assembly: AssemblyProduct("NKUGatewayClient-Desktop")]

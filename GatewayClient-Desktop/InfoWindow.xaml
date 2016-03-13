@@ -10,7 +10,8 @@
         WindowStartupLocation="CenterScreen"
         Title="当前登录信息" MouseDoubleClick="Window_MouseDoubleClick" Loaded="Window_Loaded" ShowInTaskbar="False">
     <Grid>
-        <Border BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Left" Height="270" Margin="1,0,0,0" VerticalAlignment="Top" Width="198" Opacity="0.95">
+        <Image x:Name="image" Margin="0,0,2,30" Cursor="SizeNWSE" Source="images/logo_64.png"/>
+        <Border BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Left" Height="270" Margin="1,0,0,0" VerticalAlignment="Top" Width="198" Opacity="0.9">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF5DEEB9" Offset="0"/>

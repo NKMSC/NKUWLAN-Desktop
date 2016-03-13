@@ -16,6 +16,7 @@ namespace Desktop_GUI
     public partial class App : Application
     {
         static Mutex mutex = new Mutex(true,"nku_gateway_client_desktop");
+
         public App()
         {
             CheckRunning();
@@ -24,7 +25,8 @@ namespace Desktop_GUI
             if (info != null || GatewayClient.Gateway.Login() == true)
             {
                 Gateway.Timeout = Config.Timeout;
-                Current.StartupUri = new Uri("InfoWindow.xaml", UriKind.RelativeOrAbsolute);
+                TrayNotify.Start("网关已经登录成功，可以上网啦~");
+                //Current.StartupUri = new Uri("InfoWindow.xaml", UriKind.RelativeOrAbsolute);
             }
             else
             {

@@ -4,7 +4,7 @@
         xmlns:local="clr-namespace:Desktop_GUI"
         Title="南开网关登录" Height="350" Width="366" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize"
         MouseDown="Window_MouseDown" Background="Transparent" Loaded="Window_Loaded" 
-        WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Topmost="True">
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="True" Topmost="True" Icon="images/logo_64.png">
     <Window.Resources>
         <Storyboard x:Key="leafLeave" RepeatBehavior="Forever">
             <!--小树叶动画-->
@@ -12,6 +12,9 @@
             </DoubleAnimation>
             <!--大树叶动画-->
             <DoubleAnimation BeginTime="00:00:00" AutoReverse="True" Duration="00:00:02" From="15" To="-15" Storyboard.TargetProperty="Angle" Storyboard.TargetName="igBigLeaf">
+            </DoubleAnimation>
+            <!--logo-->
+            <DoubleAnimation BeginTime="00:00:00" AutoReverse="True" Duration="00:00:02" From="-1" To="9" Storyboard.TargetProperty="Y" Storyboard.TargetName="igLogo">
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Key="cloudMove" RepeatBehavior="Forever">
@@ -21,6 +24,7 @@
             <!--白云透明度-->
             <DoubleAnimation BeginTime="00:00:00" Duration="00:00:14" From="0.8" To="0.1" AutoReverse="False" Storyboard.TargetName="imgCloud" Storyboard.TargetProperty="Opacity">
             </DoubleAnimation>
+
         </Storyboard>
     </Window.Resources>
     <Grid Margin="0,50,0,0">
@@ -32,7 +36,14 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <Label Content="NKU网关登录" Foreground="White" FontWeight="Bold" Margin="0,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="NKU网关登录" Foreground="White" FontWeight="Bold" Margin="10,64,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="64" Margin="264,-26,0,0" VerticalAlignment="Top" Width="64" Source="images/logo_64.png" Cursor="Hand">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform x:Name="igLogo"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
         <TextBlock x:Name="errBlock" TextWrapping="Wrap" Margin="0,94,0,175" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#FFEC7070"/>
         <Image Source="images/sun.png" Width="105" Height="53" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-6,-25,0,0"/>
         <Image Source="images/leaves.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -58,7 +69,7 @@
             </Image.RenderTransform>
         </Image>
         <TextBox Width="280" Height="30" HorizontalAlignment="Center" x:Name="UidBox" FontWeight="Bold" 
-    		Background="#FFFBFBFB" BorderBrush="#FFDFE6EB" Foreground="#FF17FF00" Margin="0,-10,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" UndoLimit="10" ToolTip="输入登录账号" FontSize="24" KeyDown="UidBox_KeyDown"/>
+    		Background="#FFFBFBFB" BorderBrush="#FFDFE6EB" Foreground="#FF171714" Margin="0,-10,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" UndoLimit="10" ToolTip="输入登录账号" FontSize="24" KeyDown="UidBox_KeyDown"/>
         <PasswordBox Width="280" Height="30" HorizontalAlignment="Center" x:Name="PwdBox" Margin="0,90,0,0" FontWeight="Bold" 
     		Foreground="#FF0A0A0A" Background="#FFFBFBFB" BorderBrush="White" ToolTip="回车键快速登录" KeyDown="PwdBox_KeyDown" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
         <CheckBox x:Name="saveCheckBox" IsChecked="True" Content="保存账号" Margin="43,228,253,58" Foreground="#FFE7F7E5"/>

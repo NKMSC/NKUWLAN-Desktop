@@ -37,7 +37,6 @@ namespace Desktop_GUI
             var result = Gateway.Login(uid, pwd);
             if (result == true)
             {
-                InfoWindow infoWindow;
                 if (saveCheckBox.IsChecked == true)
                 {
                     Config.UID = uid;
@@ -48,9 +47,10 @@ namespace Desktop_GUI
                     Config.PWD = null;
                     Config.UID = null;
                 }
-                infoWindow = autoCheckBox.IsChecked == true ? new InfoWindow(uid, pwd) : new InfoWindow();
+                //InfoWindow infoWindow = autoCheckBox.IsChecked == true ? new InfoWindow(uid, pwd) : new InfoWindow();
+                App.Current.MainWindow = new InfoWindow();
                 this.Close();
-                infoWindow.Show();
+                App.Current.MainWindow.Show();
             }
             else
             {

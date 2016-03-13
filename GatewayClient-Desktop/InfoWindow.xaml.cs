@@ -11,8 +11,9 @@ namespace Desktop_GUI
     /// </summary>
     public partial class InfoWindow : Window
     {
-        String UID;
-        String PWD;
+        /// <summary>
+        /// 账号信息
+        /// </summary>
         AccountInfo Info
         {
             set
@@ -28,20 +29,27 @@ namespace Desktop_GUI
         {
             InitializeComponent();
         }
-        /// <summary>
-        /// 自动登录
-        /// </summary>
-        /// <param name="uid"></param>
-        /// <param name="pwd"></param>
-        public InfoWindow(String uid, String pwd = null)
+
+        public bool Logout()
         {
-            InitializeComponent();
-            Title += "-[" + uid + " 自动重连]";
-            UID = uid;
-            PWD = pwd;
+            if (Gateway.Logout())
+            {
+                App.Current.MainWindow = new LoginWindow();
+                this.Close();
+                App.Current.MainWindow.Show();
+                return true;
+            }
+            else
+            {
+                tipText.Text = "网关连接异常";
+                MessageBox.Show("注销异常，可能已经断网!", "网络异常");
+                return false;
+            }
         }
-
-
+        /// <summary>
+        /// 更新信息
+        /// </summary>
+        /// <returns></returns>
         bool UpdateInfo()
         {
             var info = Gateway.Info;
@@ -66,18 +74,7 @@ namespace Desktop_GUI
         /// <param name="e"></param>
         private void logoutBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (Gateway.Logout())
-            {
-                LoginWindow loginWindow = new LoginWindow();
-                loginWindow.Show();
-                this.Close();
-            }
-            else
-            {
-                tipText.Text = "网关连接异常";
-                MessageBox.Show("注销异常，可能已经断网!", "网络异常");
-            }
-
+            Logout();
         }
 
         private void exitBtn_Click(object sender, RoutedEventArgs e)
@@ -88,7 +85,8 @@ namespace Desktop_GUI
 
         private void hideBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.Hide();
+            TrayNotify.Start();
         }
 
         /// <summary>
