@@ -16,12 +16,12 @@ namespace GatewayClient
     /// <summary>
     /// 提供登录相关方法
     /// </summary>
-   public static class Gateway
+    public static class Gateway
     {
         /// <summary>
         /// 版本
         /// </summary>
-        public const string Version = "1.0-beta";
+        public const string Version = "2.0-beta";
         /// <summary>
         /// 超时时间
         /// </summary>
@@ -31,20 +31,30 @@ namespace GatewayClient
         /// 获取登录状态和账号信息
         /// 未登录或在无法获取时返回null
         /// </summary>
-        public static AccountInfo? Info {
-            get {
-                AccountInfo? info=null;
-                foreach (var host in HostList)
+        public static AccountInfo? Info
+        {
+            get
+            {
+                long now = DateTime.Now.Ticks;
+                if (lastUpdateTime == 0 || now - lastUpdateTime < REFRESH_TIME)
                 {
-                    info= Query(host+query_path);
-                    if(info!=null)
+                    lastUpdateTime = now;
+                    AccountInfo? _info = null;
+                    foreach (var host in HostList)
                     {
-                        return info;
+                        _info = Query(host + query_path);
+                        if (_info != null)
+                        {
+                            info = _info;
+                            return info;
+                        }
                     }
                 }
+
                 return info;
             }
         }
+        public static AccountInfo? info;
 
 
         /// <summary>
@@ -69,7 +79,7 @@ namespace GatewayClient
                     hostlist = new List<string>(2);
                     hostlist.Add(HOST_BALITAI);
                     hostlist.Add(HOST_JINNAN);
-                    
+
                 }
                 else
                 {
@@ -88,7 +98,7 @@ namespace GatewayClient
             {
                 if (hostlist == null)
                 {
-                    DefaultHost = null;         
+                    DefaultHost = null;
                 }
                 return hostlist;
             }
@@ -109,7 +119,8 @@ namespace GatewayClient
         const string login_path = ":801/eportal/?c=ACSetting&a=Login";
         const string logout_path = ":801/eportal/?c=ACSetting&a=Logout";
         const string sucess_title = @"<title>登录成功</title>";
-
+        private const long REFRESH_TIME = 10 * 10000000;//信息刷新最短时间
+        private static long lastUpdateTime = 0;
 
         private static string pwd = null;
         private static string uid = null;
@@ -145,7 +156,7 @@ namespace GatewayClient
         public static bool? Login()
         {
             //未指定读取配置
-            if(uid==null&&pwd==null)
+            if (uid == null && pwd == null)
             {
                 uid = Config.UID;
                 pwd = Config.PWD;
@@ -156,7 +167,7 @@ namespace GatewayClient
                 foreach (var host in HostList)
                 {
                     var s = postLogin(host + login_path);
-                    if(s==null)
+                    if (s == null)
                     {
                         continue;
                     }
@@ -281,7 +292,7 @@ namespace GatewayClient
                 var requeststream = post.GetRequestStream();
                 requeststream.Write(toout, 0, toout.Length);
 
-                var result = (new System.IO.StreamReader(post.GetResponse().GetResponseStream(),System.Text.Encoding.GetEncoding("GB2312"))).ReadToEnd();
+                var result = (new System.IO.StreamReader(post.GetResponse().GetResponseStream(), System.Text.Encoding.GetEncoding("GB2312"))).ReadToEnd();
                 return result;
             }
             catch (Exception)

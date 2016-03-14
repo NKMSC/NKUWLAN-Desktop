@@ -32,10 +32,10 @@ namespace Desktop_GUI
         private static void InitialTray()
         {
             _notify = new NotifyIcon();
-            _notify.Text = "NKU网关客户端";
+            _notify.Text = "NKU网关客户端\n单击显示\n右键提示\n悬浮查看流量";
             _notify.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
             _notify.MouseClick += new System.Windows.Forms.MouseEventHandler(notifyIcon_MouseClick);
-
+            _notify.MouseMove += _notify_MouseMove;
             //注销菜单项
             MenuItem Logout = new MenuItem("注销[Logout]", Logout_Click);
             //登录菜单项
@@ -54,6 +54,22 @@ namespace Desktop_GUI
             MenuItem[] childen = new MenuItem[] { Logout, View, About, Exit };
             _notify.ContextMenu = new ContextMenu(childen);
 
+        }
+
+        private static void _notify_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            var info = Gateway.Info;
+            if (info == null)
+            {
+                _notify.Text = "当前离线";
+            }
+            else
+            {
+                _notify.Text = "账号:" + info.Value.Uid
+                    + "\n流量:" + info.Value.Flow.ToString("00.00")
+                    + "\n余额:" + info.Value.Fee.ToString("00.00");
+            }
         }
 
         /// <summary>
