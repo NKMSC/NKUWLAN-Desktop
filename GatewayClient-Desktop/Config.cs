@@ -4,6 +4,7 @@
  * 2016-03-11 Created by NewFuture
  * *******************************************************/
 using System;
+using System.IO;
 using System.Xml;
 
 namespace GatewayClient
@@ -11,10 +12,24 @@ namespace GatewayClient
     /// <summary>
     /// 配置读写
     /// </summary>
-   public static class Config
+    public static class Config
     {
-        public const String PATH = "NKU_Gateway.config.xml";
-        public const String VERSION = "1.0";
+        public const String VERSION = "2.0";
+        private const String FILE_NAME = "NKU_Gateway.config.xml";
+        private static String _path = null;
+        private static String PATH
+        {
+            get
+            {
+                //如果当前文件不存在则存于用户目录中
+                if (_path == null)
+                {
+                    _path = File.Exists(FILE_NAME) ? FILE_NAME :
+                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + FILE_NAME;
+                }
+                return _path;
+            }
+        }
         /// <summary>
         /// 默认网关
         /// </summary>
@@ -72,7 +87,13 @@ namespace GatewayClient
                 SET("nku/account/pwd", value);
             }
         }
-       
+
+        /// <summary>
+        /// 其他选项
+        /// Conifg.Options["anything"]
+        /// </summary>
+        public static Setting Options = new Setting();
+
         /// <summary>
         /// 获取配置
         /// </summary>
@@ -157,7 +178,6 @@ namespace GatewayClient
             }
         }
 
-
         /// <summary>
         /// 设置配置
         /// </summary>
@@ -180,6 +200,21 @@ namespace GatewayClient
                 ConfigXml.Save(PATH);
             }
             catch { }
+        }
+
+        public class Setting
+        {
+            public String this[String key]
+            {
+                get
+                {
+                    return Config.GET("option/" + key);
+                }
+                set
+                {
+                    Config.SET("option/" + key, value);
+                }
+            }
         }
     }
 }
