@@ -69,12 +69,12 @@
             </Image.RenderTransform>
         </Image>
         <TextBox Width="280" Height="30" HorizontalAlignment="Center" x:Name="UidBox" FontWeight="Bold" 
-    		Background="#FFFBFBFB" BorderBrush="#FFDFE6EB" Foreground="#FF171714" Margin="0,-10,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" UndoLimit="10" ToolTip="输入登录账号" FontSize="24" KeyDown="UidBox_KeyDown"/>
+    		Background="#FFFBFBFB" BorderBrush="#FFDFE6EB" Foreground="#FF171714" Margin="0,-10,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" UndoLimit="10" ToolTip="输入登录账号" FontSize="21.333" KeyDown="UidBox_KeyDown"/>
         <PasswordBox Width="280" Height="30" HorizontalAlignment="Center" x:Name="PwdBox" Margin="0,90,0,0" FontWeight="Bold" 
     		Foreground="#FF0A0A0A" Background="#FFFBFBFB" BorderBrush="White" ToolTip="回车键快速登录" KeyDown="PwdBox_KeyDown" VerticalContentAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
-        <CheckBox x:Name="saveCheckBox" IsChecked="True" Content="保存账号" Margin="43,228,253,58" Foreground="#FFE7F7E5"/>
-        <CheckBox x:Name="autoCheckBox" IsChecked="True" Content="自动重连" Margin="43,247,253,38" Foreground="#FFEAF0E2"/>
-        <Button x:Name="loginBtn" Margin="126,228,138,36" Content="登录"  Click="loginBtn_Click" Background="#FF7BC251" Foreground="#FFEDFAF7" BorderBrush="#FF1D1F1A" BorderThickness="0" FontSize="24" FontWeight="Bold" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" Cursor="Hand"/>
-        <Button x:Name="exitBtn" Height="30" Margin="251,232,43,38" Content="退出" Click="exitBtn_Click" Background="#FFFEF389" Foreground="#FFB7BEBF" BorderBrush="#FFA4A28B" BorderThickness="0" Cursor="Hand"/>
+        <CheckBox x:Name="saveCheckBox" IsChecked="True" Content="保存账号" Margin="43,228,253,58" Foreground="#FFF9F9F8" Background="#FFFEF389"/>
+        <CheckBox x:Name="autoCheckBox" IsChecked="True" Content="自动重连" Margin="43,247,253,38" Foreground="#FFFEFEFE" Background="#FFFEF389"/>
+        <Button x:Name="loginBtn" Margin="126,228,138,36" Content="登录"  Click="loginBtn_Click" Background="#FF7BC251" Foreground="#FFEDFAF7" BorderBrush="{x:Null}" BorderThickness="0" FontSize="24" FontWeight="Bold" FontFamily="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}" Cursor="Hand"/>
+        <Button x:Name="exitBtn" Height="30" Margin="251,232,43,38" Content="退出" Click="exitBtn_Click" Background="#FFFEF389" Foreground="#FFB7BEBF" BorderBrush="{x:Null}" BorderThickness="0" Cursor="Hand" FontWeight="Bold"/>
     </Grid>
 </Window>

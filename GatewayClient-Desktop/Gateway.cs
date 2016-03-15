@@ -173,6 +173,8 @@ namespace GatewayClient
                     }
                     else if (s.IndexOf(sucess_title) > 0)
                     {
+                        //登录成功更新时间
+                        lastUpdateTime = 0;
                         return true;
                     }
                     else
@@ -199,6 +201,10 @@ namespace GatewayClient
         /// <returns>异常返回false</returns>
         static public bool Logout()
         {
+            lastUpdateTime = 0;
+            info = null;
+            pwd = null;
+            uid = null;
             try
             {
                 HttpWebRequest request;

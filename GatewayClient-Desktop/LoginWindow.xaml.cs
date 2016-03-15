@@ -35,7 +35,7 @@ namespace Desktop_GUI
             string uid = UidBox.Text.Trim();
             string pwd = PwdBox.Password.Trim();
             var result = Gateway.Login(uid, pwd);
-            if (result == true)
+            if (result == true || (result == false && Gateway.Info != null))
             {
                 if (saveCheckBox.IsChecked == true)
                 {
