@@ -1,28 +1,29 @@
 # GatewayClient-Desktop
+
 南开网关登录客户端桌面版 NKU Gateway Client for Windows Desktop
 
-### Todo
+### 特性(features)
 
-* 登录 【done】 
-* 注销 【done】
+* 网关登录 【done】 
+* 网关注销 【done】
 * 流量查询 【done】
 * 保存账号 【done】
 * 自动登录 【done】
 * 托盘程序 【done】
+* 开机启动 【done】
 * 界面美化 【doing】
-* 自动刷新
-* 开机启动
+* 自动刷新 【doing】
 * 关机注销
 * 配置管理
 * 流量监控
 * 后台服务
 * 账户管理
 
-### 截图
+### 截图 
 
 * 登录 ![登录](login.png)
 * 信息 ![信息](info.png)
-* 第二次开始在托盘显示 
+* 自动登录托盘显示 
 
 ### 引用
 
@@ -43,16 +44,22 @@ __
 │
 └─GatewayClient-Desktop
     │
-    │  Config.cs  [配置读写]
-    │  Gateway.cs [网关接口]
-    │  MainWindow.xaml     [界面]
-    │  MainWindow.xaml.cs  [界面响应]
-    │
+	│  App.xaml.cs  [APP 入口]
+	│  AutoStart.cs  [开机启动]
+    │  Config.cs     [配置读写]
+    │  Gateway.cs    [网关接口]
+    │  InfoWindow.xaml     [信息界面]
+    │  InfoWindow.xaml.cs  [界面响应]
+	│  LoginWindow.xaml     [登录界面]
+    │  LoginWindow.xaml.cs  [界面响应]
+    │	TrayNotify.cs	[托盘通知]
+	└─images 图片资源
+
 ```
 
 ### 作者
 
 @NewFuture
 
-### 开源协议
-Apache2 License
+### 协议和授权
+Apache2 License 开源协议
