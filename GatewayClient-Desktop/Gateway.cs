@@ -21,11 +21,12 @@ namespace GatewayClient
         /// <summary>
         /// 版本
         /// </summary>
-        public const string Version = "2.0-beta";
+        public const string Version = "2.1";
         /// <summary>
         /// 超时时间
         /// </summary>
         public static int Timeout = 2500;
+
 
         /// <summary>
         /// 获取登录状态和账号信息
@@ -146,6 +147,30 @@ namespace GatewayClient
         }
 
         /// <summary>
+        /// 创建请求
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
+        private static WebRequest CreateRequest(string url, string method = "GET")
+        {
+            WebRequest req = WebRequest.Create(url);
+            var proxy = Config.Options["proxy"];
+            //代理设置
+            if(proxy==null)
+            {
+                req.Proxy=null;
+            }else if(proxy.ToLower()!="default")
+            {
+                req.Proxy = new WebProxy(proxy, true);
+            }
+            
+            req.Method = method;
+            req.Timeout = Timeout;
+            return req;
+
+        }
+        /// <summary>
         /// 再次登陆
         /// </summary>
         /// <returns>
@@ -207,12 +232,10 @@ namespace GatewayClient
             uid = null;
             try
             {
-                HttpWebRequest request;
                 foreach (var host in HostList)
                 {
                     string url = host + logout_path;
-                    request = (HttpWebRequest)WebRequest.Create(url);
-                    request.Timeout = Timeout;
+                    var request = CreateRequest(url);
                     StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream(), Encoding.GetEncoding("gb2312"));
                     sr.ReadToEnd();
                     sr.Close();
@@ -232,10 +255,10 @@ namespace GatewayClient
         /// <returns>查询成功返回账号信息，失败返回null</returns>
         static private AccountInfo? Query(string url)
         {
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            req.Timeout = 3000;
+
             try
             {
+                var req = CreateRequest(url);
                 StreamReader sr = new StreamReader(req.GetResponse().GetResponseStream(), Encoding.GetEncoding("gb2312"));
                 string s = sr.ReadToEnd();
                 sr.Close();
@@ -289,9 +312,7 @@ namespace GatewayClient
             try
             {
                 //提交表单
-                System.Net.WebRequest post = System.Net.HttpWebRequest.Create(login_url);
-                post.Timeout = Timeout;
-                post.Method = "POST";
+                var post = CreateRequest(login_url, "POST");
                 post.ContentType = "application/x-www-form-urlencoded";
                 byte[] toout = System.Text.Encoding.UTF8.GetBytes("DDDDD=" + uid + "&upass=" + pwd);
                 post.ContentLength = toout.Length;

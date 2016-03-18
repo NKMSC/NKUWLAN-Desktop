@@ -15,7 +15,7 @@ namespace GatewayClient
     public static class Config
     {
         public const String VERSION = "2.0";
-        private const String FILE_NAME = "NKU_Gateway.config.xml";
+        private const String FILE_NAME = "NKU_Gateway.config";
         private static String _path = null;
         private static String PATH
         {
@@ -148,6 +148,10 @@ namespace GatewayClient
                 accountInfoElement.AppendChild(uidElement);
                 XmlElement pwdElement = _config.CreateElement("pwd");
                 accountInfoElement.AppendChild(pwdElement);
+
+                //可选设置
+                XmlElement OptionsElement = _config.CreateElement("options");
+                rootElement.AppendChild(OptionsElement);
 
                 _config.Save(PATH);
                 return _config;

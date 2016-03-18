@@ -25,6 +25,7 @@ namespace Desktop_GUI
             InitializeComponent();
             UidBox.Text = Config.UID;
             PwdBox.Password = Config.PWD;
+            //this.autoCheckBox.
         }
 
         /// <summary>
@@ -47,7 +48,6 @@ namespace Desktop_GUI
                     Config.PWD = null;
                     Config.UID = null;
                 }
-                //InfoWindow infoWindow = autoCheckBox.IsChecked == true ? new InfoWindow(uid, pwd) : new InfoWindow();
                 App.Current.MainWindow = new InfoWindow();
                 this.Close();
                 App.Current.MainWindow.Show();
@@ -127,11 +127,21 @@ namespace Desktop_GUI
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            autoCheckBox.IsChecked = AutoStart.Enable;
             Storyboard sbd = Resources["leafLeave"] as Storyboard;
             sbd.Begin();
-
             Storyboard baiyun = Resources["cloudMove"] as Storyboard;
             baiyun.Begin();
+        }
+
+        /// <summary>
+        /// 开机启动
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void autoCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            AutoStart.Enable = autoCheckBox.IsChecked.Value;
         }
     }
 }
