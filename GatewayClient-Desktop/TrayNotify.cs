@@ -46,15 +46,18 @@ namespace Desktop_GUI
             MenuItem View = new MenuItem("显示[Display]", View_Click);
 
             //退出菜单项
-            MenuItem Exit = new MenuItem("退出[Exit]", Exit_Click);
+            MenuItem Close = new MenuItem("关闭[Close]", Close_Click);
             //关于
             MenuItem About = new MenuItem("关于[About]", About_Click);
+            //关于
+            MenuItem LogoutExit = new MenuItem("注销退出", Logout_Exit_Click);
 
             //关联托盘控件
-            MenuItem[] childen = new MenuItem[] { Logout, View, About, Exit };
+            MenuItem[] childen = new MenuItem[] { Logout, View, About, Close, LogoutExit };
             _notify.ContextMenu = new ContextMenu(childen);
 
         }
+
 
         /// <summary>
         /// 显示气球消息
@@ -118,8 +121,9 @@ namespace Desktop_GUI
             else
             {
                 _notify.Text = "账号:" + info.Value.Uid
-                    + "\n流量:" + info.Value.Flow.ToString("00.00")
-                    + "\n余额:" + info.Value.Fee.ToString("00.00");
+                    + "\n流量:" + info.Value.flow.ToString("00.00")
+                    + "\n余额:" + info.Value.fee.ToString("00.00")
+                + "\n速度:" + info.Value.Speed;
             }
             if (e.Button == MouseButtons.Left)
             {
@@ -131,7 +135,7 @@ namespace Desktop_GUI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static void Exit_Click(object sender, EventArgs e)
+        private static void Close_Click(object sender, EventArgs e)
         {
             ShowTips("Bye~", "See you next time!");
             Environment.Exit(0);
@@ -161,7 +165,7 @@ namespace Desktop_GUI
         }
 
         /// <summary>
-        /// 退出选项
+        /// 关于选项
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -172,6 +176,26 @@ namespace Desktop_GUI
                 System.Diagnostics.Process.Start("https://github.com/nkumstc/GatewayClient-Desktop");
             }
             catch { }
+        }
+
+
+        /// <summary>
+        /// 注销并关闭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void Logout_Exit_Click(object sender, EventArgs e)
+        {
+            if (Gateway.Logout())
+            {
+                ShowTips("已注销~", "See you next time!");
+            }
+            else
+            {
+                ShowTips("网络异常~", "已退出!");
+            }
+
+            Environment.Exit(0);
         }
 
     }

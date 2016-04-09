@@ -174,7 +174,14 @@ namespace GatewayClient
             try
             {
                 var node = ConfigXml.SelectSingleNode(path);
-                return String.IsNullOrEmpty(attr) ? node.InnerText.Trim() : node.Attributes[attr].Value;
+                if (node == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return String.IsNullOrEmpty(attr) ? node.InnerText.Trim() : node.Attributes[attr].Value;
+                }
             }
             catch
             {

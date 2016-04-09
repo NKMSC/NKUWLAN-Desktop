@@ -19,9 +19,9 @@ namespace Desktop_GUI
             set
             {
                 UIDText.Text = value.Uid;
-                FeeText.Text = value.Fee < 100 ? value.Fee.ToString("0.00") + "元" : value.Fee.ToString("0.0");
-                FlowText.Text = value.Flow < 1000 ? value.Flow.ToString("0.00") + "兆" : value.Flow.ToString("0.0");
-                TimeText.Text = value.Time.ToString() + "秒";
+                FeeText.Text = value.fee < 100 ? value.fee.ToString("0.00") + "元" : value.fee.ToString("0.0");
+                FlowText.Text = value.flow < 1000 ? value.flow.ToString("0.00") + "兆" : value.flow.ToString("0.0");
+                TimeText.Text = value.time.ToString() + "秒";
             }
         }
 
