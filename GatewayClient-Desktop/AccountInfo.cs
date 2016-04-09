@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace GatewayClient
+﻿namespace GatewayClient
 {
     /// <summary>
     /// 账号信息
@@ -73,15 +68,15 @@ namespace GatewayClient
             {
                 if (time < 60)
                 {
-                    return time.ToString("N") + "分";
+                    return time.ToString() + "分";
                 }
                 else if (time < 24 * 60)
                 {
-                    return (time / 60).ToString("N") + "时" + (time % 60).ToString("N") + "分";
+                    return ((int)time / 60).ToString() + "时" + (time % 60).ToString() + "分";
                 }
                 else
                 {
-                    return (time / (1440)).ToString("N") + "天" + (time % 1440 / 60).ToString("N") + "时";
+                    return ((int)time / (1440)).ToString() + "天" + (time % 1440 / 60).ToString("F2") + "时";
                 }
             }
         }

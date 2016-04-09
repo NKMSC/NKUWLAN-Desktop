@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Timers;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using GatewayClient;
 
 namespace Desktop_GUI
@@ -19,11 +21,13 @@ namespace Desktop_GUI
             set
             {
                 UIDText.Text = value.Uid;
-                FeeText.Text = value.fee < 100 ? value.fee.ToString("0.00") + "元" : value.fee.ToString("0.0");
-                FlowText.Text = value.flow < 1000 ? value.flow.ToString("0.00") + "兆" : value.flow.ToString("0.0");
-                TimeText.Text = value.time.ToString() + "秒";
+                FeeText.Text = value.Fee;
+                FlowText.Text = value.Flow;
+                TimeText.Text = value.Time;
+                SpeedText.Text = value.Speed;
             }
         }
+        private delegate bool TimerDispatcherDelegate();
 
         public InfoWindow()
         {
@@ -64,6 +68,7 @@ namespace Desktop_GUI
             else
             {
                 Info = info.Value;
+                tipText.Text = DateTime.Now.ToString("HH:mm:ss") + " 更新";
                 return true;
             }
         }
@@ -105,12 +110,31 @@ namespace Desktop_GUI
         private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             UpdateInfo();
-            tipText.Text = DateTime.Now.ToString("HH:mm:ss") + " 更新";
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateInfo();
+            var timer = new Timer(60001);
+            timer.Elapsed += Timer_Elapsed;
+            timer.Enabled = true;
+        }
+
+        //定时更新信息
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            this.Dispatcher.Invoke(DispatcherPriority.Normal, new TimerDispatcherDelegate(UpdateInfo));
+        }
+
+        /// <summary>
+        /// 置顶
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void topBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Topmost = !this.Topmost;
+            topBtn.Content = Topmost ? "取消" : "置顶";
         }
     }
 }
