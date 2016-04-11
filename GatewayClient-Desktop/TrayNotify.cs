@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Forms;
-using System.Drawing;
-using System.Threading;
 using GatewayClient;
 
 namespace Desktop_GUI
@@ -50,7 +47,7 @@ namespace Desktop_GUI
             //关于
             MenuItem About = new MenuItem("关于[About]", About_Click);
             //关于
-            MenuItem LogoutExit = new MenuItem("注销退出", Logout_Exit_Click);
+            MenuItem LogoutExit = new MenuItem("注销并退出", Logout_Exit_Click);
 
             //关联托盘控件
             MenuItem[] childen = new MenuItem[] { Logout, View, About, Close, LogoutExit };
@@ -121,8 +118,8 @@ namespace Desktop_GUI
             else
             {
                 _notify.Text = "账号:" + info.Value.Uid
-                    + "\n流量:" + info.Value.flow.ToString("00.00")
-                    + "\n余额:" + info.Value.fee.ToString("00.00")
+                    + "\n流量:" + info.Value.Flow
+                    + "\n余额:" + info.Value.Fee
                 + "\n速度:" + info.Value.Speed;
             }
             if (e.Button == MouseButtons.Left)
@@ -188,7 +185,7 @@ namespace Desktop_GUI
         {
             if (Gateway.Logout())
             {
-                ShowTips("已注销~", "See you next time!");
+                ShowTips("已注销正在退出~", "See you next time!");
             }
             else
             {

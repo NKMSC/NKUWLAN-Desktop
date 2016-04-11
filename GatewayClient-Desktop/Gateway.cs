@@ -21,7 +21,7 @@ namespace GatewayClient
         /// <summary>
         /// 版本
         /// </summary>
-        public const string Version = "2.1";
+        public const string Version = "2.2";
         /// <summary>
         /// 超时时间
         /// </summary>
