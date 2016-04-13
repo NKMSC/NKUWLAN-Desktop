@@ -59,9 +59,19 @@ namespace Desktop_GUI
             var info = Gateway.Info;
             if (info == null)
             {
-                if (Gateway.Login() == null)
+                var login = Gateway.Login();
+                if (login == true)
                 {
-
+                    tipText.Text = DateTime.Now.ToString("HH:mm:ss") + "已重新登录";
+                    return true;
+                 
+                }else if (login==false)
+                {
+                    tipText.Text = DateTime.Now.ToString("HH:mm:ss") + "登录失败";
+                }
+                else
+                {
+                    tipText.Text = DateTime.Now.ToString("HH:mm:ss") + "网关连接常";
                 }
                 return false;
             }

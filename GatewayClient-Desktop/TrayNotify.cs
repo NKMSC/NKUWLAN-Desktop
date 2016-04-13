@@ -170,7 +170,7 @@ namespace Desktop_GUI
         {
             try
             {
-                System.Diagnostics.Process.Start("https://github.com/nkumstc/GatewayClient-Desktop");
+                System.Diagnostics.Process.Start("https://github.com/NKMSC/NKUWLAN-Desktop");
             }
             catch { }
         }

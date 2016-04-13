@@ -25,6 +25,7 @@ namespace Desktop_GUI
             InitializeComponent();
             UidBox.Text = Config.UID;
             PwdBox.Password = Config.PWD;
+            errBlock.Text ="当前版本"+ Application.ResourceAssembly.GetName().Version.ToString();
             //this.autoCheckBox.
         }
 
@@ -65,6 +66,7 @@ namespace Desktop_GUI
         /// <param name="e"></param>
         private void PwdBox_KeyDown(object sender, KeyEventArgs e)
         {
+            errBlock.Text = "";
             if (e.Key == Key.Enter)
             {
                 PwdBox.Password = PwdBox.Password.Trim();
@@ -73,6 +75,7 @@ namespace Desktop_GUI
         }
         private void UidBox_KeyDown(object sender, KeyEventArgs e)
         {
+            errBlock.Text = "";
             if (e.Key == Key.Enter)
             {
                 if (String.IsNullOrEmpty(PwdBox.Password))
@@ -92,6 +95,7 @@ namespace Desktop_GUI
         /// <param name="e"></param>
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
+            errBlock.Text = "";
             Login();
         }
 
@@ -112,8 +116,7 @@ namespace Desktop_GUI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            errBlock.Text = "";
+        {           
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();

@@ -30,7 +30,7 @@
         <TextBlock x:Name="tipText" TextWrapping="Wrap" Margin="10,190,10,0" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" FontSize="16" Foreground="#E5F91212" Height="38" Width="180" TextDecorations="Underline" Text="每分钟刷新"/>
         <DockPanel Margin="1,220,1,5">
             <Button x:Name="topBtn" Content="置顶" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="50" Height="25"  FontSize="16" BorderThickness="0" Click="topBtn_Click"/>
-            <Button x:Name="logoutBtn" Content="注销" VerticalAlignment="Center" Width="50" Click="logoutBtn_Click" Height="25" FontSize="16" BorderThickness="0"/>
+            <Button x:Name="logoutBtn" Content="注销" VerticalAlignment="Center" Width="50" Click="logoutBtn_Click" Height="25" FontSize="16" BorderThickness="1,0"/>
             <Button x:Name="hideBtn" Content="隐藏" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="50" Height="25" Click="hideBtn_Click" FontSize="16" BorderThickness="1,0"/>
             <Button x:Name="exitBtn" Content="退出" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="50" Height="25" Click="exitBtn_Click" FontSize="16" BorderThickness="0"/>
         </DockPanel>
