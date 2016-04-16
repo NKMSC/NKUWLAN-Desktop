@@ -5,34 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Desktop_GUI"
         mc:Ignorable="d"
-        Height="250" Width="200" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize"
+        Height="96.763" Width="367.202" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize"
         MouseDown="Window_MouseDown" Background="Transparent"
         WindowStartupLocation="CenterScreen"
-        Title="当前登录信息" MouseDoubleClick="Window_MouseDoubleClick" Loaded="Window_Loaded" ShowInTaskbar="False">
-    <Grid>
-        <TextBlock x:Name="UIDText" TextWrapping="Wrap" Margin="0,0,2,30" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" FontSize="24" Foreground="#FFFDFDFD"  Text="当前登录状态" Background="#E57E7B7B"/>
-        <DockPanel Margin="10,30,10,0" VerticalAlignment="Top">
-            <Label  Content="流量" HorizontalAlignment="Left" Width="40" FontSize="15"/>
-            <TextBlock x:Name="FlowText" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="flow"  Width="150" FontSize="21.333" Foreground="#FFFF8139" FontWeight="Bold"/>
+        Title="当前登录信息" Loaded="Window_Loaded" ShowInTaskbar="False" Topmost="True">
+    <Grid Height="98" VerticalAlignment="Top" Background="#7F000000" Margin="0,0,0,-1" HorizontalAlignment="Left" Width="367">
+        <DockPanel Margin="6,7,239,68">
+            <Label  Content="" HorizontalAlignment="Center" Width="20" FontSize="15" Margin="0" VerticalAlignment="Center" Height="20">
+            </Label>
+            <TextBlock x:Name="UIDText" TextWrapping="Wrap" FontSize="13.333" Foreground="#FFFDFDFD"  Text="当前登录状态" Margin="5,0,0,0" VerticalAlignment="Center" Background="{x:Null}" HorizontalAlignment="Center" FontWeight="Thin"/>
         </DockPanel>
-        <DockPanel Margin="10,70,10,0" VerticalAlignment="Top">
-            <Label  Content="速度" HorizontalAlignment="Left" Width="40" FontSize="15"/>
-            <TextBlock x:Name="SpeedText" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="speed"  Width="150" FontSize="21.333" Foreground="#FFFF8139" FontWeight="Bold"/>
+        <DockPanel Margin="6,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="145">
+            <TextBlock x:Name="FlowText" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="flow"  Width="93" FontSize="13.333" Foreground="#FFFBF8F6" Height="20" Padding="5,0,0,0" FontWeight="Thin"/>
         </DockPanel>
-        <DockPanel Margin="10,110,10,0" VerticalAlignment="Top">
-            <Label  Content="时长" HorizontalAlignment="Left" Width="40" FontSize="15"/>
-            <TextBlock x:Name="TimeText" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="time"  Width="150" FontSize="18" Foreground="#FFFF8139" FontWeight="Bold"/>
+        <DockPanel Margin="160,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="193">
+            <TextBlock x:Name="SpeedText" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="speed"  Width="108" FontSize="13.333" Foreground="#FFFBF8F6" Height="20" FontWeight="Thin"/>
         </DockPanel>
-        <DockPanel Margin="10,150,10,0" VerticalAlignment="Top">
-            <Label  Content="余额" HorizontalAlignment="Left" Width="40" FontSize="15"/>
-            <TextBlock x:Name="FeeText" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="fee"  Width="150" FontSize="21.333" Foreground="#FFFF8139" FontWeight="Bold"/>
+        <DockPanel Margin="160,70,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="196">
+            <TextBlock x:Name="TimeText" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="time"  Width="152" FontSize="13.333" Foreground="#FFFBF8F6" Height="20" FontWeight="Thin"/>
         </DockPanel>
-        <TextBlock x:Name="tipText" TextWrapping="Wrap" Margin="10,190,10,0" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" FontSize="16" Foreground="#E5F91212" Height="38" Width="180" TextDecorations="Underline" Text="每分钟刷新"/>
-        <DockPanel Margin="1,220,1,5">
-            <Button x:Name="topBtn" Content="置顶" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="50" Height="25"  FontSize="16" BorderThickness="0" Click="topBtn_Click"/>
-            <Button x:Name="logoutBtn" Content="注销" VerticalAlignment="Center" Width="50" Click="logoutBtn_Click" Height="25" FontSize="16" BorderThickness="1,0"/>
-            <Button x:Name="hideBtn" Content="隐藏" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="50" Height="25" Click="hideBtn_Click" FontSize="16" BorderThickness="1,0"/>
-            <Button x:Name="exitBtn" Content="退出" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="50" Height="25" Click="exitBtn_Click" FontSize="16" BorderThickness="0"/>
+        <DockPanel Margin="6,70,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="145">
+            <TextBlock x:Name="RFlowText" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="rflow"  Width="83" FontSize="13.333" Foreground="#FFFBF8F6" Height="20" FontWeight="Thin"/>
+        </DockPanel>
+        <TextBlock x:Name="tipText" TextWrapping="Wrap" Margin="176,13,111,0" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" FontSize="10.667" Foreground="#FFFAB4B4" Height="12" Width="80" TextDecorations="{x:Null}" Text="每秒钟刷新"/>
+        <DockPanel Margin="289,7,5,76">
+            <Button x:Name="logoutBtn" Content="注销" Click="logoutBtn_Click" FontSize="8" BorderThickness="0,0,0,1" Background="{x:Null}" BorderBrush="{x:Null}" Height="12" VerticalAlignment="Center" Width="24" HorizontalAlignment="Center" Margin="0"/>
+            <Button x:Name="hideBtn" Content="隐藏" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="12" Click="hideBtn_Click" FontSize="8" BorderThickness="0,0,0,1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0"/>
+            <Button x:Name="exitBtn" Content="退出" Width="25" Height="12" Click="exitBtn_Click" FontSize="8" BorderThickness="0,0,0,1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0"/>
         </DockPanel>
     </Grid>
 </Window>

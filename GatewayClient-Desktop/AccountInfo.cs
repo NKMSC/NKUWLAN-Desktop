@@ -41,17 +41,48 @@
         }
 
         /// <summary>
-        /// 余额 单位￥
+        /// 余额 单位￥ 
         /// </summary>
         public double fee;
         /// <summary>
-        ///格式化余额
+        /// 流量格式化字符串，带单位
         /// </summary>
         public string Fee
         {
             get
             {
-                return fee <= 0 ? "0" : fee.ToString("G4") + "￥";
+                return fee <= 0 ? "0" : fee.ToString("C");
+            }
+        }
+
+        /// <summary>
+        /// 剩余流量 单位MB 
+        /// </summary>
+        public double rflow;
+        /// <summary>
+        ///格式化余额
+        /// </summary>
+        public string RFlow
+        {
+            get
+            {
+                rflow = 500 * fee;
+                if (rflow < 1)
+                {
+                    //<1MB单位KB
+                    return (rflow * 1024).ToString("G4") + "K";
+
+                }
+                else if (rflow < 1000)
+                {
+                    //<1GB 单位用MB
+                    return rflow.ToString("G4") + "M";
+                }
+                else
+                {
+                    //网关计费单位1G=1000M
+                    return (rflow / 1000).ToString("G4") + "G";
+                }
             }
         }
 
@@ -76,7 +107,7 @@
                 }
                 else
                 {
-                    return ((int)time / (1440)).ToString() + "天" + (time % 1440 / 60).ToString("F2") + "时";
+                    return ((int)time / (1440)).ToString() + "天" + (time % 1440 / 60).ToString("F0") + "时" + (time % 1440 % 60).ToString() + "分";
                 }
             }
         }
@@ -129,6 +160,7 @@
             Uid = uid;
             this.flow = flow;
             this.fee = fee;
+            this.rflow = fee * 500;
             this.time = time;
             this.speed = 0;
         }

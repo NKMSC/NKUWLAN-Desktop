@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using GatewayClient;
+using System.Windows.Forms;
 
 namespace Desktop_GUI
 {
@@ -11,7 +12,7 @@ namespace Desktop_GUI
     /// 信息显示窗口
     /// Info.xaml 的交互逻辑
     /// </summary>
-    public partial class InfoWindow : Window
+    public partial class InfoWindow //: Window
     {
         /// <summary>
         /// 账号信息
@@ -21,7 +22,7 @@ namespace Desktop_GUI
             set
             {
                 UIDText.Text = value.Uid;
-                FeeText.Text = value.Fee;
+                RFlowText.Text = value.RFlow;
                 FlowText.Text = value.Flow;
                 TimeText.Text = value.Time;
                 SpeedText.Text = value.Speed;
@@ -46,10 +47,11 @@ namespace Desktop_GUI
             else
             {
                 tipText.Text = "网关连接异常";
-                MessageBox.Show("注销异常，可能已经断网!", "网络异常");
+                System.Windows.MessageBox.Show("注销异常，可能已经断网!", "网络异常");
                 return false;
             }
         }
+
         /// <summary>
         /// 更新信息
         /// </summary>
@@ -71,7 +73,7 @@ namespace Desktop_GUI
                 }
                 else
                 {
-                    tipText.Text = DateTime.Now.ToString("HH:mm:ss") + "网关连接常";
+                    tipText.Text = DateTime.Now.ToString("HH:mm:ss") + "网关连接正常";
                 }
                 return false;
             }
@@ -82,6 +84,7 @@ namespace Desktop_GUI
                 return true;
             }
         }
+
         /// <summary>
         /// 注销
         /// </summary>
@@ -117,15 +120,17 @@ namespace Desktop_GUI
             }
         }
 
-        private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //取消手动刷新
+        /*private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             UpdateInfo();
-        }
+        }*/
 
+        //每秒更新
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateInfo();
-            var timer = new Timer(60001);
+            var timer = new System.Timers.Timer(1001);
             timer.Elapsed += Timer_Elapsed;
             timer.Enabled = true;
         }
@@ -137,14 +142,14 @@ namespace Desktop_GUI
         }
 
         /// <summary>
-        /// 置顶
+        /// 总是置顶
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void topBtn_Click(object sender, RoutedEventArgs e)
+        /*private void topBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Topmost = !this.Topmost;
             topBtn.Content = Topmost ? "取消" : "置顶";
-        }
+        }*/
     }
 }
