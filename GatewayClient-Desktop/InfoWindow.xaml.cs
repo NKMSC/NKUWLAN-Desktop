@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using GatewayClient;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace Desktop_GUI
@@ -26,6 +27,7 @@ namespace Desktop_GUI
                 FlowText.Text = value.Flow;
                 TimeText.Text = value.Time;
                 SpeedText.Text = value.Speed;
+                TipText.Text = value.Tip;
             }
         }
         private delegate bool TimerDispatcherDelegate();
@@ -139,6 +141,15 @@ namespace Desktop_GUI
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             this.Dispatcher.Invoke(DispatcherPriority.Normal, new TimerDispatcherDelegate(UpdateInfo));
+        }
+
+        private void popweb_Click(object sender, RoutedEventArgs e)
+        {
+            //this.Process.Start("http://http://ecard.nankai.edu.cn/");
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            process.StartInfo.FileName = "iexplore.exe";
+            process.StartInfo.Arguments = "http://ecard.nankai.edu.cn/";
+            process.Start();
         }
 
         /// <summary>

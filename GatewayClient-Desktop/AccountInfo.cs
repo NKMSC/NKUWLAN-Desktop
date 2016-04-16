@@ -45,7 +45,7 @@
         /// </summary>
         public double fee;
         /// <summary>
-        /// 流量格式化字符串，带单位
+        /// 格式化余额
         /// </summary>
         public string Fee
         {
@@ -60,7 +60,7 @@
         /// </summary>
         public double rflow;
         /// <summary>
-        ///格式化余额
+        /// 流量格式化字符串，带单位
         /// </summary>
         public string RFlow
         {
@@ -87,11 +87,22 @@
         }
 
         /// <summary>
+        /// 余额提示
+        /// </summary>
+        public string Tip
+        {
+            get
+            {
+                return fee > 1 ? "" : "余额不足一元，点击充值";
+            }
+        }
+
+        /// <summary>
         /// 时间 单位 min
         /// </summary>
         public double time;
         /// <summary>
-        ///时间
+        /// 时间
         /// </summary>
         public string Time
         {
@@ -117,7 +128,7 @@
         /// </summary>
         public double speed;
         /// <summary>
-        ///格式化速度
+        /// 格式化速度
         /// </summary>
         public string Speed
         {
