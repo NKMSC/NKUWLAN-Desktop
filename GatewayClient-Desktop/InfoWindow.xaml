@@ -11,27 +11,42 @@
         Title="当前登录信息" Loaded="Window_Loaded" ShowInTaskbar="False" Topmost="True">
     <Grid Height="98" VerticalAlignment="Top" Background="#7F000000" Margin="0,0,0,-1" HorizontalAlignment="Left" Width="367">
         <DockPanel Margin="6,7,239,68">
-            <Label  Content="" HorizontalAlignment="Center" Width="20" FontSize="15" Margin="0" VerticalAlignment="Center" Height="20">
-            </Label>
-            <TextBlock x:Name="UIDText" TextWrapping="Wrap" FontSize="13.333" Foreground="#FFFDFDFD"  Text="当前登录状态" Margin="5,0,0,0" VerticalAlignment="Center" Background="{x:Null}" HorizontalAlignment="Center" FontWeight="Thin"/>
+            <Image Source="images/uid.png" x:Name="uid" Height="20" Width="20"/>
+            <TextBlock x:Name="UIDText" TextWrapping="Wrap" FontSize="13.333" Foreground="#FFFDFDFD"  Text="当前登录状态" Margin="5,0,0,0" VerticalAlignment="Center" Background="{x:Null}" HorizontalAlignment="Left" FontWeight="Thin"/>
         </DockPanel>
         <DockPanel Margin="6,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="145">
-            <TextBlock x:Name="FlowText" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="flow"  Width="93" FontSize="13.333" Foreground="#FFFBF8F6" Height="20" Padding="5,0,0,0" FontWeight="Thin"/>
+            <Image Source="images/flow4.png" x:Name="flow" Height="20" Width="20"/>
+            <TextBlock x:Name="FlowText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="flow"  Width="93" FontSize="13.333" Foreground="#FFFBF8F6" Height="20" Padding="0" FontWeight="Thin"/>
         </DockPanel>
         <DockPanel Margin="160,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="193">
-            <TextBlock x:Name="SpeedText" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="speed"  Width="108" FontSize="13.333" Foreground="#FFFBF8F6" Height="20" FontWeight="Thin"/>
+            <Image Source="images/network2.png" x:Name="speed" Height="20" Width="20"/>
+            <TextBlock x:Name="SpeedText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="speed"  Width="108" FontSize="13.333" Foreground="#FFFBF8F6" Height="20" FontWeight="Thin"/>
         </DockPanel>
         <DockPanel Margin="160,70,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="196">
-            <TextBlock x:Name="TimeText" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="time"  Width="152" FontSize="13.333" Foreground="#FFFBF8F6" Height="20" FontWeight="Thin"/>
+            <Image Source="images/clock.png" x:Name="time" Width="20" Height="20"/>
+            <TextBlock x:Name="TimeText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="time"  Width="152" FontSize="13.333" Foreground="#FFFBF8F6" Height="20" FontWeight="Thin"/>
         </DockPanel>
         <DockPanel Margin="6,70,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="145">
-            <TextBlock x:Name="RFlowText" HorizontalAlignment="Left" Margin="0" TextWrapping="Wrap" Text="rflow"  Width="83" FontSize="13.333" Foreground="#FFFBF8F6" Height="20" FontWeight="Thin"/>
+            <Image Source="images/flow1.png" x:Name="rflow" Height="20" Width="20"/>
+            <TextBlock x:Name="RFlowText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="rflow"  Width="83" FontSize="13.333" Foreground="#FFFBF8F6" Height="20" FontWeight="Thin"/>
         </DockPanel>
         <TextBlock x:Name="tipText" TextWrapping="Wrap" Margin="176,13,111,0" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" FontSize="10.667" Foreground="#FFFAB4B4" Height="12" Width="80" TextDecorations="{x:Null}" Text="每秒钟刷新"/>
-        <DockPanel Margin="289,7,5,76">
-            <Button x:Name="logoutBtn" Content="注销" Click="logoutBtn_Click" FontSize="8" BorderThickness="0,0,0,1" Background="{x:Null}" BorderBrush="{x:Null}" Height="12" VerticalAlignment="Center" Width="24" HorizontalAlignment="Center" Margin="0"/>
-            <Button x:Name="hideBtn" Content="隐藏" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="12" Click="hideBtn_Click" FontSize="8" BorderThickness="0,0,0,1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0"/>
-            <Button x:Name="exitBtn" Content="退出" Width="25" Height="12" Click="exitBtn_Click" FontSize="8" BorderThickness="0,0,0,1" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0"/>
+        <DockPanel Margin="301,13,14,70">
+            <Button x:Name="hideBtn" Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Width="12" Height="12" Click="hideBtn_Click" FontSize="8" BorderThickness="0,0,0,1" BorderBrush="{x:Null}" Margin="5,0,0,0">
+                <Button.Background>
+                    <ImageBrush Stretch="Uniform" ImageSource="images/view.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="logoutBtn" Content="" Click="logoutBtn_Click" FontSize="8" BorderThickness="0,0,0,1" BorderBrush="{x:Null}" Height="12" VerticalAlignment="Center" Width="12" HorizontalAlignment="Left" Margin="5,0,0,0">
+                <Button.Background>
+                    <ImageBrush ImageSource="images/logout.png" Stretch="Uniform"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="exitBtn" Content="" Width="12" Height="12" Click="exitBtn_Click" FontSize="8" BorderThickness="0,0,0,1" BorderBrush="{x:Null}" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Button.Background>
+                    <ImageBrush Stretch="Uniform" ImageSource="images/close.png"/>
+                </Button.Background>
+            </Button>
         </DockPanel>
     </Grid>
 </Window>

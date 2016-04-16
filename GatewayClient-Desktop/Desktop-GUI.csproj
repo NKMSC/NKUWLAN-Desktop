@@ -191,6 +191,21 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\close.png" />
+    <Resource Include="images\flow1.png" />
+    <Resource Include="images\flow2.png" />
+    <Resource Include="images\flow3.png" />
+    <Resource Include="images\flow4.png" />
+    <Resource Include="images\logout.png" />
+    <Resource Include="images\network1.png" />
+    <Resource Include="images\network2.png" />
+    <Resource Include="images\uid.png" />
+    <Resource Include="images\view.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
