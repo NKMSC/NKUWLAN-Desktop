@@ -10,39 +10,39 @@
         WindowStartupLocation="CenterScreen"
         Title="当前登录信息" Loaded="Window_Loaded" ShowInTaskbar="False" Topmost="True">
     <Grid Height="109" VerticalAlignment="Top" Background="#7F000000" HorizontalAlignment="Left" Width="278">
-        <DockPanel Margin="6,7,0,0" HorizontalAlignment="Left" Width="103" VerticalAlignment="Top">
+        <DockPanel Margin="6,7,0,0" HorizontalAlignment="Left" Width="103" VerticalAlignment="Top" ToolTip="当前用户">
             <Image Source="images/uid.png" x:Name="uid" Height="25" Width="25"/>
-            <TextBlock x:Name="UIDText" TextWrapping="Wrap" FontSize="18.667" Foreground="#FFFF5A5A"  Text="当前登录状态" Margin="5,-12,0,-12" VerticalAlignment="Center" Background="{x:Null}" HorizontalAlignment="Left" FontWeight="Thin" Width="114"/>
+            <TextBlock x:Name="UIDText" TextWrapping="Wrap" FontSize="18.667" Foreground="#FFFFA5A5"  Text="当前登录状态" Margin="5,-12,0,-12" VerticalAlignment="Center" Background="{x:Null}" HorizontalAlignment="Left" FontWeight="Thin" Width="114"/>
         </DockPanel>
-        <DockPanel Margin="6,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112">
+        <DockPanel Margin="6,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112" ToolTip="本月已用流量">
             <Image Source="images/flow4.png" x:Name="flow" Height="25" Width="25"/>
-            <TextBlock x:Name="FlowText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="flow"  Width="72" FontSize="18.667" Foreground="#FFFFF406" Height="20" Padding="0" FontWeight="Thin"/>
+            <TextBlock x:Name="FlowText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="flow"  Width="72" FontSize="18.667" Foreground="#FFF9F6B1" Height="20" Padding="0" FontWeight="Thin"/>
         </DockPanel>
-        <DockPanel Margin="118,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="156">
+        <DockPanel Margin="118,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="156" ToolTip="当前网速">
             <Image Source="images/network2.png" x:Name="speed" Height="25" Width="25"/>
-            <TextBlock x:Name="SpeedText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="speed"  Width="108" FontSize="18.667" Foreground="#FF00FF19" Height="20" FontWeight="Thin"/>
+            <TextBlock x:Name="SpeedText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="speed"  Width="108" FontSize="18.667" Foreground="#FFC0A9FF" Height="20" FontWeight="Thin"/>
         </DockPanel>
-        <DockPanel Margin="118,78,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="156">
+        <DockPanel Margin="118,78,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="156" ToolTip="本月上网时间">
             <Image Source="images/clock.png" x:Name="time" Width="25" Height="25"/>
-            <TextBlock x:Name="TimeText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="time"  Width="123" FontSize="18.667" Foreground="#FFFFA569" Height="20" FontWeight="Thin"/>
+            <TextBlock x:Name="TimeText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="time"  Width="123" FontSize="18.667" Foreground="#FFFFD1B3" Height="20" FontWeight="Thin"/>
         </DockPanel>
-        <DockPanel Margin="6,78,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="107">
+        <DockPanel Margin="6,78,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="107" ToolTip="可用流量">
             <Image Source="images/flow1.png" x:Name="rflow" Height="25" Width="25"/>
-            <TextBlock x:Name="RFlowText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="rflow"  Width="74" FontSize="18.667" Foreground="#FF00C3FF" Height="20" FontWeight="Thin"/>
+            <TextBlock x:Name="RFlowText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="rflow"  Width="74" FontSize="18.667" Foreground="#FFA6DCFB" Height="20" FontWeight="Thin"/>
         </DockPanel>
-        <TextBlock x:Name="tipText" TextWrapping="Wrap" Margin="108,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TextAlignment="Center" FontSize="10.667" Foreground="#FFFAB4B4" Height="12" Width="74" TextDecorations="{x:Null}" Text="每秒钟刷新"/>
+        <TextBlock x:Name="tipText" TextWrapping="Wrap" Margin="108,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TextAlignment="Center" FontSize="10.667" Foreground="#FFD4D4D4" Height="12" Width="74" TextDecorations="{x:Null}" Text="每秒钟刷新" FontWeight="Thin"/>
         <DockPanel Margin="198,10,0,71" HorizontalAlignment="Left" Width="70" VerticalAlignment="Top">
-            <Button x:Name="hideBtn" Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Width="18" Height="18" Click="hideBtn_Click" FontSize="8" BorderThickness="0,0,0,1" BorderBrush="{x:Null}" Margin="5,0,0,0" Foreground="{x:Null}">
+            <Button x:Name="hideBtn" Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Width="18" Height="18" Click="hideBtn_Click" FontSize="8" BorderThickness="0,0,0,1" BorderBrush="{x:Null}" Margin="5,0,0,0" Foreground="{x:Null}" ToolTip="隐藏">
                 <Button.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="images/view.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="logoutBtn" Content="" Click="logoutBtn_Click" FontSize="8" BorderThickness="0,0,0,1" BorderBrush="{x:Null}" Height="18" VerticalAlignment="Center" Width="18" HorizontalAlignment="Left" Margin="5,0,0,0" Foreground="{x:Null}">
+            <Button x:Name="logoutBtn" Content="" Click="logoutBtn_Click" FontSize="8" BorderThickness="0,0,0,1" BorderBrush="{x:Null}" Height="18" VerticalAlignment="Center" Width="18" HorizontalAlignment="Left" Margin="5,0,0,0" Foreground="{x:Null}" ToolTip="注销" FontFamily="Microsoft YaHei UI">
                 <Button.Background>
                     <ImageBrush ImageSource="images/logout.png" Stretch="Uniform"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="exitBtn" Content="" Width="18" Height="18" Click="exitBtn_Click" FontSize="8" BorderThickness="0,0,0,1" BorderBrush="{x:Null}" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{x:Null}">
+            <Button x:Name="exitBtn" Content="" Width="18" Height="18" Click="exitBtn_Click" FontSize="8" BorderThickness="0,0,0,1" BorderBrush="{x:Null}" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{x:Null}" ToolTip="退出">
                 <Button.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="images/close.png"/>
                 </Button.Background>
