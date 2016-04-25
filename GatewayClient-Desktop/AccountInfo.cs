@@ -66,12 +66,11 @@
         {
             get
             {
-                rflow = 500 * fee;
+                rflow = (flow < 5 * 1024) ? (500 * fee + 5 * 1024 - flow) : (500 * fee);
                 if (rflow < 1)
                 {
                     //<1MB单位KB
                     return (rflow * 1024).ToString("G4") + "K";
-
                 }
                 else if (rflow < 1000)
                 {
