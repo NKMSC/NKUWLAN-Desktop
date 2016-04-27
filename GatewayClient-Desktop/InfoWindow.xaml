@@ -27,7 +27,7 @@
             <TextBlock x:Name="TimeText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="time"  Width="123" FontSize="18.667" Foreground="#FFFFD1B3" Height="20" FontWeight="Thin"/>
         </DockPanel>
         <DockPanel Margin="6,78,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="107" ToolTip="可用流量">
-            <Image Source="images/flow1.png" x:Name="rflow" Height="25" Width="25"/>
+            <Image Source="images/flow0.png" x:Name="rflow" Height="25" Width="25"/>
             <TextBlock x:Name="RFlowText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="rflow"  Width="74" FontSize="18.667" Foreground="#FFA6DCFB" Height="20" FontWeight="Thin"/>
         </DockPanel>
         <TextBlock x:Name="tipText" TextWrapping="Wrap" Margin="36,31,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="10.667" Foreground="#FFD4D4D4" Height="12" Width="74" TextDecorations="{x:Null}" Text="每秒钟刷新" FontWeight="Thin"/>
@@ -50,6 +50,5 @@
         </DockPanel>
         <TextBlock x:Name="TipText" HorizontalAlignment="Left" Height="12" Margin="3,66,0,0" TextWrapping="Wrap" Text="tip" VerticalAlignment="Top" Width="119" FontSize="10.667" Foreground="#FFFDFBFB" FontWeight="Thin"/>
         <Button x:Name="popweb" Content="" HorizontalAlignment="Left" Height="13" Margin="2,65,0,0" VerticalAlignment="Top" Width="120" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}" Click="popweb_Click"/>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="316,58,-114,0" VerticalAlignment="Top" Width="76"/>
     </Grid>
 </Window>
