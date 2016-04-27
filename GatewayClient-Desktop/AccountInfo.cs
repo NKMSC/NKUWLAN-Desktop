@@ -66,7 +66,7 @@
         {
             get
             {
-                rflow = (flow < 5 * 1024) ? (500 * fee + 5 * 1024 - flow) : (500 * fee);
+                rflow = (flow < 5 * 1000) ? (500 * fee + 5 * 1000 - flow) : (500 * fee);
                 if (rflow < 1)
                 {
                     //<1MB单位KB
