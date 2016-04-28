@@ -26,10 +26,59 @@ namespace Desktop_GUI
                 FlowText.Text = value.Flow;
                 TimeText.Text = value.Time;
                 SpeedText.Text = value.Speed;
-                //TipText.Text = value.Tip;
             }
         }
         private delegate bool TimerDispatcherDelegate();
+
+        /// <summary>
+        /// 窗体靠边隐藏位置
+        /// </summary>
+        internal AnchorStyles anchorStatus = AnchorStyles.None;
+        public AnchorStyles Anchor
+        {
+            get
+            {
+                return anchorStatus;
+            }
+            set
+            {
+                const int SIDE_WIDTH = 10;
+                switch (value)
+                {
+                    case AnchorStyles.Top:
+                        this.Top = (this.Height - SIDE_WIDTH) * (-1);
+                        break;
+                    case AnchorStyles.Left:
+                        this.Left = (-1) * (this.Width - SIDE_WIDTH);
+                        break;
+                    case AnchorStyles.Right:
+                        this.Left = Screen.PrimaryScreen.Bounds.Width - SIDE_WIDTH;
+                        break;
+                    case AnchorStyles.Bottom:
+                        this.Top = (Screen.PrimaryScreen.Bounds.Height - SIDE_WIDTH);
+                        break;
+                    case AnchorStyles.None://取消隐藏
+                        switch (this.anchorStatus)
+                        {
+                            case AnchorStyles.Top:
+                                this.Top = 0;
+                                break;
+                            case AnchorStyles.Left:
+                                this.Left = 0;
+                                break;
+                            case AnchorStyles.Right:
+                                this.Left = Screen.PrimaryScreen.Bounds.Width - this.Width;
+                                break;
+                            case AnchorStyles.Bottom:
+                                this.Top = Screen.PrimaryScreen.Bounds.Height - this.Height;
+                                break;
+                        }
+                        break;
+                }
+                anchorStatus = value;
+            }
+        }
+
 
         public InfoWindow()
         {
@@ -67,8 +116,9 @@ namespace Desktop_GUI
                 {
                     tipText.Text = DateTime.Now.ToString("HH:mm:ss") + "已重新登录";
                     return true;
-                 
-                }else if (login==false)
+
+                }
+                else if (login == false)
                 {
                     tipText.Text = DateTime.Now.ToString("HH:mm:ss") + "登录失败";
                 }
@@ -81,7 +131,7 @@ namespace Desktop_GUI
             else
             {
                 Info = info.Value;
-                tipText.Text = DateTime.Now.ToString("HH:mm:ss") + " 更新";
+                tipText.Text = DateTime.Now.ToString("HH:mm") + " 更新";
                 return true;
             }
         }
@@ -121,168 +171,98 @@ namespace Desktop_GUI
             }
         }
 
-        //取消手动刷新
-        /*private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            UpdateInfo();
-        }*/
 
-        //每秒更新
+        /// <summary>
+        /// 窗体加载之后
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateInfo();
-            var timer = new System.Timers.Timer(1001);
-            timer.Elapsed += Timer_Elapsed;
+            var timer = new System.Timers.Timer(10001);
+            timer.Elapsed += Timer_Update;
             timer.Enabled = true;
+            timer.Start();
+            this.Activated += InfoWindow_Activated;
+            this.MouseLeave += InfoWindow_MouseLeave;
+        }
 
-            System.Windows.Forms.Timer StopRectTimer = new System.Windows.Forms.Timer();
-            StopRectTimer.Tick += new EventHandler(timer_Tick);
-            StopRectTimer.Interval = 1001;
-            StopRectTimer.Enabled = true;
-            //this.TopMost = true;
-            StopRectTimer.Start();
+        /// <summary>
+        /// 窗体激活
+        /// </summary>
+        private void InfoWindow_Activated(object sender, EventArgs e)
+        {
+            //显示窗体
+            Anchor = AnchorStyles.None;
+            this.MouseLeave += InfoWindow_MouseLeave;
         }
 
         //定时更新信息
-        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        private void Timer_Update(object sender, ElapsedEventArgs e)
         {
             this.Dispatcher.Invoke(DispatcherPriority.Normal, new TimerDispatcherDelegate(UpdateInfo));
         }
 
-        //点击跳转至网费充值网页
-        /*private void popweb_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 鼠标进入窗体
+        /// </summary>
+        private void InfoWindow_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            //this.Process.Start("http://http://ecard.nankai.edu.cn/");
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            process.StartInfo.FileName = "iexplore.exe";
-            process.StartInfo.Arguments = "http://ecard.nankai.edu.cn/";
-            process.Start();
-        }*/
+            if (Anchor != AnchorStyles.None)
+            {
+                Anchor = AnchorStyles.None;
+                this.MouseEnter -= InfoWindow_MouseEnter;
+                this.MouseLeave += InfoWindow_MouseLeave;
+            }
+        }
 
         /// <summary>
-        /// 总是置顶
+        /// 鼠标移出窗体
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /*private void topBtn_Click(object sender, RoutedEventArgs e)
+        private void InfoWindow_MouseLeave(object sender, Object e)
         {
-            this.Topmost = !this.Topmost;
-            topBtn.Content = Topmost ? "取消" : "置顶";
-        }*/
-
-
-        //private void Form1_Load(object sender, EventArgs e)
-        //{
-
-
-        //}
-
-        //记录鼠标是否在窗体内
-        private bool mouseinform = false;
-
-        //鼠标在窗体内
-        private void Window_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            mouseinform = true;
-        }
-
-        //鼠标在窗体外
-        private void Window_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            mouseinform = false;
-        }
-
-        //利用Timer控件根据窗体位置进行隐藏和展示，如果在边缘则缩进，鼠标再次移到改位置则展示
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            if (mouseinform)
+            var current = GetCurretnAnchor();
+            if (current != Anchor)
             {
-                switch (this.StopAanhor)
+                Anchor = current;
+                if (Anchor != AnchorStyles.None)
                 {
-                    case AnchorStyles.Top:
-                        {
-                            this.Top = 0;
-                            break;
-                        }
-                    case AnchorStyles.Left:
-                        {
-                            this.Left = 0;
-                            break;
-                        }
-                    case AnchorStyles.Right:
-                        {
-                            this.Left = Screen.PrimaryScreen.Bounds.Width - this.Width;
-                            break;
-                        }
-                    case AnchorStyles.Bottom:
-                        {
-                            this.Top = Screen.PrimaryScreen.Bounds.Height - this.Height;
-                            break;
-                        }
+                    this.MouseEnter += InfoWindow_MouseEnter;
+                    this.MouseLeave -= InfoWindow_MouseLeave;
                 }
+            }
+        }
+
+        /// <summary>
+        /// 获取当前位置
+        /// </summary>
+        /// <returns></returns>
+        private AnchorStyles GetCurretnAnchor()
+        {
+            if (this.Top <= 1)
+            {
+                return AnchorStyles.Top;
+            }
+            else if (this.Left <= 1)
+            {
+                return AnchorStyles.Left;
+            }
+            else if (this.Top + 1 >= Screen.PrimaryScreen.Bounds.Height - this.Height)
+            {
+                return AnchorStyles.Bottom;
+            }
+            else if (this.Left + this.Width + 1 >= Screen.PrimaryScreen.Bounds.Width)
+            {
+
+                return AnchorStyles.Right;
             }
             else
             {
-                switch (this.StopAanhor)
-                {
-                    case AnchorStyles.Top:
-                        {
-                            this.Top = (this.Height - 8) * (-1);
-                            break;
-                        }
-                    case AnchorStyles.Left:
-                        {
-                            this.Left = (-1) * (this.Width - 8);
-                            break;
-                        }
-                    case AnchorStyles.Right:
-                        {
-                            this.Left = Screen.PrimaryScreen.Bounds.Width - 8;
-                            break;
-                        }
-                    case AnchorStyles.Bottom:
-                        {
-                            this.Top = (Screen.PrimaryScreen.Bounds.Height - 8);
-                            break;
-                        }
-                }
+                return AnchorStyles.None;
             }
-
-        }
-
-        //判断窗体位置
-        internal AnchorStyles StopAanhor = AnchorStyles.None;
-        private void mStopAnhor()
-        {
-            if (this.Top <= 0 && this.Left <= 0)
-            {
-                StopAanhor = AnchorStyles.None;
-            }
-            else if (this.Top <= 0)
-            {
-                StopAanhor = AnchorStyles.Top;
-            }
-            else if (this.Left <= 0)
-            {
-                StopAanhor = AnchorStyles.Left;
-            }
-            else if (this.Left >= Screen.PrimaryScreen.Bounds.Width - this.Width)
-            {
-                StopAanhor = AnchorStyles.Right;
-            }
-            else if (this.Top >= Screen.PrimaryScreen.Bounds.Height - this.Height)
-            {
-                StopAanhor = AnchorStyles.Bottom;
-            }
-            else
-            {
-                StopAanhor = AnchorStyles.None;
-            }
-        }
-
-        private void hide_LocationChanged(object sender, EventArgs e)
-        {
-            this.mStopAnhor();
         }
     }
 }

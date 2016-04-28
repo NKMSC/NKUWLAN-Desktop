@@ -45,12 +45,14 @@ namespace Desktop_GUI
             //退出菜单项
             MenuItem Close = new MenuItem("关闭[Close]", Close_Click);
             //关于
-            MenuItem About = new MenuItem("关于[About]", About_Click);
+            MenuItem Ecard = new MenuItem("在线交网费", Ecard_Click);
             //关于
+            MenuItem About = new MenuItem("关于[About]", About_Click);
+            //
             MenuItem LogoutExit = new MenuItem("注销并退出", Logout_Exit_Click);
 
             //关联托盘控件
-            MenuItem[] childen = new MenuItem[] { Logout, View, About, Close, LogoutExit };
+            MenuItem[] childen = new MenuItem[] { Logout, View, Ecard,About, Close, LogoutExit };
             _notify.ContextMenu = new ContextMenu(childen);
 
         }
@@ -195,5 +197,15 @@ namespace Desktop_GUI
             Environment.Exit(0);
         }
 
+
+        //点击跳转至网费充值网页
+        private static void Ecard_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("http://ecard.nankai.edu.cn/");
+            }
+            catch { }
+        }
     }
 }

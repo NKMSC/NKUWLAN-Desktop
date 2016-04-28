@@ -86,17 +86,6 @@
         }
 
         /// <summary>
-        /// 余额提示
-        /// </summary>
-        public string Tip
-        {
-            get
-            {
-                return fee > 1 ? "" : "余额不足一元，点击充值";
-            }
-        }
-
-        /// <summary>
         /// 时间 单位 min
         /// </summary>
         public double time;
