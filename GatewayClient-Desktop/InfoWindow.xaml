@@ -15,7 +15,7 @@
             <TextBlock x:Name="UIDText" TextWrapping="Wrap" FontSize="18.667" Foreground="#FFFFA5A5"  Text="当前登录状态" Margin="5,-12,0,-12" VerticalAlignment="Center" Background="{x:Null}" HorizontalAlignment="Left" FontWeight="Thin" Width="118"/>
         </DockPanel>
         <DockPanel Margin="6,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125" ToolTip="本月已用流量">
-            <Image Source="images/wlan.png" x:Name="flow" Height="25" Width="25"/>
+            <Image Source="images/flow4.png" x:Name="flow" Height="25" Width="25"/>
             <TextBlock x:Name="FlowText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="00.00M"  Width="100" FontSize="18.667" Foreground="#FFF9F6B1" Height="20" Padding="0" FontWeight="Thin"/>
         </DockPanel>
         <DockPanel Margin="130,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125" ToolTip="实时外网流量消耗速度">
@@ -23,15 +23,15 @@
             <TextBlock x:Name="SpeedText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="000.00KB/s"  Width="100" FontSize="18.667" Foreground="#FFC0A9FF" Height="20" FontWeight="Thin"/>
         </DockPanel>
         <DockPanel Margin="6,78,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125" ToolTip="剩余流量">
-            <Image Source="images/flow.png" x:Name="rflow" Height="25" Width="25"/>
+            <Image Source="images/flow0.png" x:Name="rflow" Height="25" Width="25"/>
             <TextBlock x:Name="RFlowText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="rflow"  Width="100" FontSize="18.667" Foreground="#FFA6DCFB" Height="20" FontWeight="Thin"/>
         </DockPanel>
         <DockPanel Margin="130,78,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125" ToolTip="当前余额">
-            <Image Source="images/money.png" x:Name="time" Width="25" Height="25"/>
+            <Image Source="images/money1.png" x:Name="time" Width="25" Height="25"/>
             <TextBlock x:Name="FeeText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="fee"  Width="90" FontSize="18.667" Foreground="#FFFFD1B3" Height="20" FontWeight="Thin"/>
         </DockPanel>
 
-        <TextBlock x:Name="tipText" TextWrapping="Wrap" Margin="10,28,10,0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="11" Foreground="#FFD4D4D4" Height="12" Width="240" TextDecorations="{x:Null}" Text="每分钟刷新" FontWeight="Thin" TextAlignment="Center"/>
+        <TextBlock x:Name="tipText" TextWrapping="Wrap" Margin="20,28,20,0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="11" Foreground="#FFD4D4D4" Height="13" Width="240" TextDecorations="{x:Null}" Text="每分钟刷新" FontWeight="Thin" TextAlignment="Center"/>
         <DockPanel Margin="198,10,0,71" HorizontalAlignment="Left" Width="70" VerticalAlignment="Top">
             <Button x:Name="hideBtn" Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Width="18" Height="18" Click="hideBtn_Click" FontSize="8" BorderThickness="0,0,0,1" BorderBrush="{x:Null}" Margin="5,0,0,0" Foreground="{x:Null}" ToolTip="隐藏">
                 <Button.Background>

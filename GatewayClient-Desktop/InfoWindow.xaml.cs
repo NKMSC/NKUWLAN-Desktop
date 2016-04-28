@@ -22,13 +22,13 @@ namespace Desktop_GUI
             set
             {
                 UIDText.Text = value.Uid;
-                UIDText.ToolTip = "本月累计使用:" + value.Time;
+                UIDText.ToolTip = "本月累计使用：" + value.Time;
                 RFlowText.Text = value.RFlow;
                 FlowText.Text = value.Flow;
                 FeeText.Text = value.Fee;
                 SpeedText.Text = value.Speed;
 
-                tipText.Text = value.Ip + " 更新于 " + DateTime.Now.ToString("HH时mm分");
+                tipText.Text = value.Ip + " 更新于 " + DateTime.Now.ToString("HH:mm");
             }
         }
         private System.Timers.Timer timer;

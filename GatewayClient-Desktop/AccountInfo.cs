@@ -54,7 +54,7 @@
         {
             get
             {
-                return fee <= 0 ? "0" : fee.ToString("C");
+                return fee <= 0 ? "0" : fee.ToString("G4") + "元";
             }
         }
 

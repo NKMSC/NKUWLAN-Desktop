@@ -193,18 +193,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\close.png" />
-    <Resource Include="images\flow1.png" />
-    <Resource Include="images\flow2.png" />
-    <Resource Include="images\flow3.png" />
-    <Resource Include="images\flow4.png" />
     <Resource Include="images\logout.png" />
     <Resource Include="images\network1.png" />
     <Resource Include="images\network2.png" />
     <Resource Include="images\uid.png" />
     <Resource Include="images\view.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\flow0.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\logout1.png" />
@@ -216,13 +209,20 @@
     <Resource Include="images\time2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\speed.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\wlan.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\flow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\money1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\flow0.png" />
+    <Resource Include="images\flow4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\speed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
