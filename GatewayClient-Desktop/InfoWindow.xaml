@@ -8,8 +8,8 @@
         Height="109.263" Width="278.202" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize"
         MouseDown="Window_MouseDown" Background="Transparent"
         WindowStartupLocation="CenterScreen"
-        Title="当前登录信息" Loaded="Window_Loaded" ShowInTaskbar="False" Topmost="True" MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave" LocationChanged="hide_LocationChanged">
-    <Grid Height="109" VerticalAlignment="Top" Background="#7F000000" HorizontalAlignment="Left" Width="278">
+        Title="当前登录信息" Loaded="Window_Loaded" ShowInTaskbar="False" Topmost="True">
+    <Grid Height="110" VerticalAlignment="Top" Background="#7F000000" HorizontalAlignment="Left" Width="280">
         <DockPanel Margin="6,7,0,0" HorizontalAlignment="Left" Width="154" VerticalAlignment="Top" ToolTip="当前用户">
             <Image Source="images/uid.png" x:Name="uid" Height="25" Width="25"/>
             <TextBlock x:Name="UIDText" TextWrapping="Wrap" FontSize="18.667" Foreground="#FFFFA5A5"  Text="当前登录状态" Margin="5,-12,0,-12" VerticalAlignment="Center" Background="{x:Null}" HorizontalAlignment="Left" FontWeight="Thin" Width="118"/>
