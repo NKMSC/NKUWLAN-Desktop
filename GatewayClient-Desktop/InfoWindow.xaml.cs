@@ -27,8 +27,11 @@ namespace Desktop_GUI
                 FlowText.Text = value.Flow;
                 FeeText.Text = value.Fee;
                 SpeedText.Text = value.Speed;
+
+                tipText.Text = value.Ip + " 更新于 " + DateTime.Now.ToString("HH时mm分");
             }
         }
+        private System.Timers.Timer timer;
         private delegate bool TimerDispatcherDelegate();
 
         /// <summary>
@@ -88,7 +91,8 @@ namespace Desktop_GUI
 
         public bool Logout()
         {
-            if (Gateway.Logout())
+            timer.Stop();
+            if (Gateway.Logout() || Gateway.Logout())
             {
                 App.Current.MainWindow = new LoginWindow();
                 this.Close();
@@ -132,7 +136,6 @@ namespace Desktop_GUI
             else
             {
                 Info = info.Value;
-                tipText.Text = DateTime.Now.ToString("HH:mm") + " 更新";
                 return true;
             }
         }
@@ -181,7 +184,7 @@ namespace Desktop_GUI
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateInfo();
-            var timer = new System.Timers.Timer(10001);
+            timer = new System.Timers.Timer(60001);
             timer.Elapsed += Timer_Update;
             timer.Enabled = true;
             timer.Start();
