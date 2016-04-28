@@ -26,8 +26,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>11</ApplicationRevision>
-    <ApplicationVersion>3.3.3.%2a</ApplicationVersion>
+    <ApplicationRevision>14</ApplicationRevision>
+    <ApplicationVersion>3.3.5.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -192,9 +192,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\clock.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\close.png" />
     <Resource Include="images\flow1.png" />
     <Resource Include="images\flow2.png" />
@@ -220,6 +217,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\speed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\wlan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\flow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

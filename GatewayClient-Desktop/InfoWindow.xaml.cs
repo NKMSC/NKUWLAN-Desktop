@@ -22,9 +22,10 @@ namespace Desktop_GUI
             set
             {
                 UIDText.Text = value.Uid;
+                UIDText.ToolTip = "本月累计使用:" + value.Time;
                 RFlowText.Text = value.RFlow;
                 FlowText.Text = value.Flow;
-                TimeText.Text = value.Time;
+                FeeText.Text = value.Fee;
                 SpeedText.Text = value.Speed;
             }
         }
