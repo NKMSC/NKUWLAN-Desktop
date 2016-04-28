@@ -21,7 +21,7 @@ namespace GatewayClient
         /// <summary>
         /// 版本
         /// </summary>
-        public const string Version = "2.2";
+        public const string Version = "2.3";
         /// <summary>
         /// 超时时间
         /// </summary>
@@ -116,8 +116,8 @@ namespace GatewayClient
 
 
         const string query_path = "/";
-        const string login_path = ":801/eportal/?c=ACSetting&a=Login";
-        const string logout_path = ":801/eportal/?c=ACSetting&a=Logout";
+        const string login_path = @":801/eportal/?c=ACSetting&a=Login";
+        const string logout_path = @":801/eportal/?c=ACSetting&a=Logout&iTermType=1";
         const string sucess_title = @"<title>登录成功</title>";
         private const long REFRESH_TIME = 60 * 10000000;//信息刷新最短时间1分钟
         private static long lastUpdateTime = 0;
@@ -200,6 +200,7 @@ namespace GatewayClient
                     {
                         //登录成功更新时间
                         lastUpdateTime = 0;
+                        DefaultHost = host;
                         return true;
                     }
                     else
@@ -245,17 +246,28 @@ namespace GatewayClient
         static public bool Logout()
         {
             lastUpdateTime = 0;
+            var path = logout_path + "&wlanuserip" + (info.HasValue ? info.Value.Ip : "null");
             info = null;
             pwd = null;
             uid = null;
             try
             {
+                var request = CreateRequest(DefaultHost + path, "POST");
+                StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream(), Encoding.GetEncoding("gb2312"));
+                sr.ReadToEnd();
+                sr.Close();
+                var i = GetInfo();
+                if (i == null)
+                {
+                    return true;
+                }
                 foreach (var host in HostList)
                 {
-                    string url = host + logout_path;
-                    var request = CreateRequest(url);
-                    StreamReader sr = new StreamReader(request.GetResponse().GetResponseStream(), Encoding.GetEncoding("gb2312"));
-                    sr.ReadToEnd();
+                    string url = host + path;
+                    request = CreateRequest(url, "POST");
+                    sr = new StreamReader(request.GetResponse().GetResponseStream(), Encoding.GetEncoding("gb2312"));
+                    var s = sr.ReadToEnd();
+                    //Console.Write(s);
                     sr.Close();
                 }
                 info = null;
@@ -313,6 +325,11 @@ namespace GatewayClient
                 {
                     info.fee /= 10000;
                 }
+
+                //IP
+                string ip = s.Remove(0, s.IndexOf(@"v4ip='") + 6);
+                ip = ip.Remove(ip.IndexOf(@"'")).Trim();
+                info.Ip = ip;
                 return info;
             }
             catch

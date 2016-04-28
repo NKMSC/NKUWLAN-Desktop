@@ -31,7 +31,7 @@
             <TextBlock x:Name="FeeText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="fee"  Width="90" FontSize="18.667" Foreground="#FFFFD1B3" Height="20" FontWeight="Thin"/>
         </DockPanel>
 
-        <TextBlock x:Name="tipText" TextWrapping="Wrap" Margin="102,28,102,0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="10.667" Foreground="#FFD4D4D4" Height="12" Width="74" TextDecorations="{x:Null}" Text="每秒钟刷新" FontWeight="Thin" TextAlignment="Center"/>
+        <TextBlock x:Name="tipText" TextWrapping="Wrap" Margin="10,28,10,0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="11" Foreground="#FFD4D4D4" Height="12" Width="240" TextDecorations="{x:Null}" Text="每分钟刷新" FontWeight="Thin" TextAlignment="Center"/>
         <DockPanel Margin="198,10,0,71" HorizontalAlignment="Left" Width="70" VerticalAlignment="Top">
             <Button x:Name="hideBtn" Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Width="18" Height="18" Click="hideBtn_Click" FontSize="8" BorderThickness="0,0,0,1" BorderBrush="{x:Null}" Margin="5,0,0,0" Foreground="{x:Null}" ToolTip="隐藏">
                 <Button.Background>

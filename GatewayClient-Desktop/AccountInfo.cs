@@ -9,7 +9,10 @@
         /// 账号
         /// </summary>
         public string Uid;
-
+        /// <summary>
+        /// IP
+        /// </summary>
+        public string Ip;
         /// <summary>
         /// 流量 单位MB
         /// </summary>
@@ -162,6 +165,7 @@
             this.rflow = fee * 500;
             this.time = time;
             this.speed = 0;
+            this.Ip = "";
         }
     }
 }
