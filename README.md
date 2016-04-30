@@ -15,9 +15,12 @@
 * 流量监控 【done】
 * 界面美化 【done】
 * 靠边隐藏 【done】
+* 内网地址 【done】
+* 注销确认 【todo】
+* 配置设置
+* 说明窗口 
 * 流量管理 
 * 关机注销
-* 配置管理
 * 后台服务
 * 账户管理
 
@@ -54,14 +57,15 @@ __
     │  InfoWindow.xaml.cs  [界面响应]
 	│  LoginWindow.xaml     [登录界面]
     │  LoginWindow.xaml.cs  [界面响应]
-    │	TrayNotify.cs	[托盘通知]
+    │  TrayNotify.cs	[托盘通知]
 	└─images 图片资源
 
 ```
 
-### 作者
+### 作者&贡献者
 
-@NewFuture
+@[NewFuture](https://github.com/NewFuture)  
+@[MYoung](https://github.com/0237) 
 
 ### 协议和授权
 Apache2 License 开源协议

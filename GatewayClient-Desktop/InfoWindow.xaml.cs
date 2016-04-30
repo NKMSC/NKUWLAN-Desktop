@@ -22,13 +22,12 @@ namespace Desktop_GUI
             set
             {
                 UIDText.Text = value.Uid;
-                UIDText.ToolTip = "本月累计使用:" + value.Time;
+                UIDText.ToolTip = "本月累计使用：" + value.Time;
                 RFlowText.Text = value.RFlow;
                 FlowText.Text = value.Flow;
                 FeeText.Text = value.Fee;
                 SpeedText.Text = value.Speed;
-
-                tipText.Text = value.Ip + " 更新于 " + DateTime.Now.ToString("HH时mm分");
+                tipText.Text = value.Ip + " 更新于 " + DateTime.Now.ToString("HH:mm");
             }
         }
         private System.Timers.Timer timer;
@@ -121,7 +120,6 @@ namespace Desktop_GUI
                 {
                     tipText.Text = DateTime.Now.ToString("HH:mm:ss") + "已重新登录";
                     return true;
-
                 }
                 else if (login == false)
                 {
@@ -162,19 +160,6 @@ namespace Desktop_GUI
             TrayNotify.Start();
         }
 
-        /// <summary>
-        /// 拖动窗口
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
-        }
-
 
         /// <summary>
         /// 窗体加载之后
@@ -184,28 +169,59 @@ namespace Desktop_GUI
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateInfo();
+
             timer = new System.Timers.Timer(60001);
             timer.Elapsed += Timer_Update;
             timer.Enabled = true;
             timer.Start();
-            this.Activated += InfoWindow_Activated;
-            this.MouseLeave += InfoWindow_MouseLeave;
+
+            this.MouseLeftButtonDown += InfoWindow_MouseLeftButtonDown;//拖动
+            this.MouseLeftButtonUp += InfoWindow_MouseLeftButtonUp;
         }
 
         /// <summary>
-        /// 窗体激活
+        /// 拖动窗口
         /// </summary>
-        private void InfoWindow_Activated(object sender, EventArgs e)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InfoWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //显示窗体
-            Anchor = AnchorStyles.None;
+#if DEBUG
+            Console.WriteLine("mouse down");
+#endif
+            DragMove();
+            this.MouseLeftButtonUp += InfoWindow_MouseLeftButtonUp;
+            //this.LostMouseCapture += InfoWindow_MouseLeftButtonUp;
+            //LostMouseCapture += InfoWindow_MouseLeftButtonUp;
             this.MouseLeave += InfoWindow_MouseLeave;
+            this.MouseEnter -= InfoWindow_MouseEnter;
         }
+
+
+        private void InfoWindow_MouseLeftButtonUp(object sender, object e)
+        {
+#if DEBUG
+            Console.WriteLine("mouse up :" + e.ToString());
+#endif
+            this.MouseLeftButtonUp -= InfoWindow_MouseLeftButtonUp;
+            this.MouseLeave -= InfoWindow_MouseLeave;
+            var current = GetCurretnAnchor();
+            if (current == AnchorStyles.None)
+            {
+                anchorStatus = AnchorStyles.None;
+            }
+            else if (current != Anchor)
+            {
+                Anchor = current;
+                this.MouseEnter += InfoWindow_MouseEnter;
+            }
+        }
+
 
         //定时更新信息
         private void Timer_Update(object sender, ElapsedEventArgs e)
         {
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, new TimerDispatcherDelegate(UpdateInfo));
+            this.Dispatcher.Invoke(DispatcherPriority.Background, new TimerDispatcherDelegate(UpdateInfo));
         }
 
         /// <summary>
@@ -213,10 +229,17 @@ namespace Desktop_GUI
         /// </summary>
         private void InfoWindow_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
+#if DEBUG
+            Console.WriteLine("mouse enter");
+#endif
+            this.MouseEnter -= InfoWindow_MouseEnter;
             if (Anchor != AnchorStyles.None)
             {
                 Anchor = AnchorStyles.None;
-                this.MouseEnter -= InfoWindow_MouseEnter;
+                this.MouseLeave += InfoWindow_MouseLeave;
+            }
+            else if (GetCurretnAnchor() != AnchorStyles.None)
+            {//当前为临时显示
                 this.MouseLeave += InfoWindow_MouseLeave;
             }
         }
@@ -228,15 +251,19 @@ namespace Desktop_GUI
         /// <param name="e"></param>
         private void InfoWindow_MouseLeave(object sender, Object e)
         {
+#if DEBUG
+            Console.WriteLine("mouse leave");
+#endif
             var current = GetCurretnAnchor();
             if (current != Anchor)
             {
                 Anchor = current;
-                if (Anchor != AnchorStyles.None)
-                {
-                    this.MouseEnter += InfoWindow_MouseEnter;
-                    this.MouseLeave -= InfoWindow_MouseLeave;
-                }
+            }
+            if (current != AnchorStyles.None)
+            {
+                //离开后藏起来了               
+                this.MouseEnter += InfoWindow_MouseEnter;
+                this.MouseLeave -= InfoWindow_MouseLeave;
             }
         }
 

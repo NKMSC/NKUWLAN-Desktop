@@ -26,8 +26,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>17</ApplicationRevision>
-    <ApplicationVersion>3.3.5.%2a</ApplicationVersion>
+    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationVersion>3.4.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -193,36 +193,23 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\close.png" />
-    <Resource Include="images\flow1.png" />
-    <Resource Include="images\flow2.png" />
-    <Resource Include="images\flow3.png" />
-    <Resource Include="images\flow4.png" />
-    <Resource Include="images\logout.png" />
-    <Resource Include="images\network1.png" />
-    <Resource Include="images\network2.png" />
     <Resource Include="images\uid.png" />
-    <Resource Include="images\view.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\flow0.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\logout1.png" />
-    <Resource Include="images\money.png" />
-    <Resource Include="images\time.png" />
-    <Resource Include="images\view1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\time2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\speed.png" />
+    <Resource Include="images\logout.png" />
+    <Resource Include="images\hide.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\wlan.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\flow.png" />
+    <Resource Include="images\money.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\flow4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\speed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
