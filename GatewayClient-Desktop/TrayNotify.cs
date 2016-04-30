@@ -52,7 +52,7 @@ namespace Desktop_GUI
             MenuItem LogoutExit = new MenuItem("注销并退出", Logout_Exit_Click);
 
             //关联托盘控件
-            MenuItem[] childen = new MenuItem[] { Logout, View, Ecard,About, Close, LogoutExit };
+            MenuItem[] childen = new MenuItem[] { Logout, View, Ecard, About, Close, LogoutExit };
             _notify.ContextMenu = new ContextMenu(childen);
 
         }
@@ -94,19 +94,24 @@ namespace Desktop_GUI
         /// <param name="e"></param>
         private static void View_Click(object sender, EventArgs e)
         {
-            if (App.Current.MainWindow == null)
+            var MainWindow = App.Current.MainWindow;
+            if (MainWindow == null)
             {
                 App.Current.MainWindow = new InfoWindow();
                 App.Current.MainWindow.Show();
             }
-            else if (App.Current.MainWindow.IsVisible)
+            else if (MainWindow.IsVisible)
             {
-                App.Current.MainWindow.Hide();
+                MainWindow.Hide();
             }
             else
             {
-                App.Current.MainWindow.Show();
-                App.Current.MainWindow.Activate();
+                MainWindow.Show();
+                if (MainWindow is InfoWindow)
+                {
+                    (MainWindow as InfoWindow).Anchor = AnchorStyles.None;
+                }
+                MainWindow.Activate();
             }
         }
 
