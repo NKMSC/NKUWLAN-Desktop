@@ -2,6 +2,8 @@
 
 南开网关登录客户端桌面版 NKU_WALN Client for Windows Desktop
 
+[下载最新发布版本](https://github.com/NKMSC/NKUWLAN-Desktop/releases)
+
 ### 特性(features)
 
 * [x] 网关登录 【done】 
@@ -32,14 +34,15 @@
 
 ### 引用
 
-根据[NKU-Gateway](https://github.com/NewFuture/NKU-Gateway)
-网关接口修改而成
+* [其他版本](http://nkuwlan.newfuture.cc)
+* 根据[NKUWLAN](https://github.com/NewFuture/NKUWLAN)网关接口修改而成
+* 登录界面修改自[QQIdea](https://github.com/JsonRuby/QQIdea)
+* LOGO修改自网络南开表情包
 
-登录界面修改自[QQIdea](https://github.com/JsonRuby/QQIdea)
-
-图标 修改自网络南开表情包![](GatewayClient-Desktop/images/logo_256.png)
+![](GatewayClient-Desktop/images/logo_256.png)
 
 ### 目录结构
+
 ```
 __
 │
