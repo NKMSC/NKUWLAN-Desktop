@@ -21,7 +21,7 @@ namespace GatewayClient
         /// <summary>
         /// 版本
         /// </summary>
-        public const string Version = "2.3";
+        public const string Version = "3.0";
         /// <summary>
         /// 超时时间
         /// </summary>
@@ -66,20 +66,11 @@ namespace GatewayClient
             set
             {
                 char[] trimChars = { '\\', '/', ' ', '\n' };
-                if (String.IsNullOrEmpty(value) || value.Trim(trimChars) == HOST_JINNAN)
+                if (String.IsNullOrEmpty(value) || value.Trim(trimChars) == DEFAULT_HOST)
                 {
                     //津南网关
-                    hostlist = new List<string>(2);
-                    hostlist.Add(HOST_JINNAN);
-                    hostlist.Add(HOST_BALITAI);
-                }
-                else if (value.Trim(trimChars) == HOST_BALITAI)
-                {
-                    //八里台网关
-                    hostlist = new List<string>(2);
-                    hostlist.Add(HOST_BALITAI);
-                    hostlist.Add(HOST_JINNAN);
-
+                    hostlist = new List<string>(1);
+                    hostlist.Add(DEFAULT_HOST);
                 }
                 else
                 {
@@ -106,13 +97,9 @@ namespace GatewayClient
         private static List<string> hostlist = null;
 
         /// <summary>
-        /// 八里台网关
+        /// 默认网关
         /// </summary>
-        public const string HOST_BALITAI = "http://202.113.18.110";
-        /// <summary>
-        /// 津南网关
-        /// </summary>
-        public const string HOST_JINNAN = "http://202.113.18.210";
+        public const string DEFAULT_HOST = "http://202.113.18.106";
 
 
         const string query_path = "/";

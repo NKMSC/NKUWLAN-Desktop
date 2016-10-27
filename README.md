@@ -1,28 +1,28 @@
-# GatewayClient-Desktop
+# NKUWLAN-Desktop
 
-南开网关登录客户端桌面版 NKU Gateway Client for Windows Desktop
+南开网关登录客户端桌面版 NKU_WALN Client for Windows Desktop
 
 ### 特性(features)
 
-* 网关登录 【done】 
-* 网关注销 【done】
-* 流量查询 【done】
-* 保存账号 【done】
-* 自动登录 【done】
-* 托盘程序 【done】
-* 开机启动 【done】
-* 自动刷新 【done】
-* 流量监控 【done】
-* 界面美化 【done】
-* 靠边隐藏 【done】
-* 内网地址 【done】
-* 注销确认 【todo】
-* 配置设置
-* 说明窗口 
-* 流量管理 
-* 关机注销
-* 后台服务
-* 账户管理
+* [x] 网关登录 【done】 
+* [x] 网关注销 【done】
+* [x] 流量查询 【done】
+* [x] 保存账号 【done】
+* [x] 自动登录 【done】
+* [x] 托盘程序 【done】
+* [x] 开机启动 【done】
+* [x] 自动刷新 【done】
+* [x] 流量监控 【done】
+* [x] 界面美化 【done】
+* [x] 靠边隐藏 【done】
+* [x] 内网地址 【done】
+* [ ] 注销确认 【todo】
+* [ ] 配置设置
+* [ ] 说明窗口 
+* [ ] 流量管理 
+* [ ] 关机注销
+* [ ] 后台服务
+* [ ] 账户管理
 
 ### 截图 
 

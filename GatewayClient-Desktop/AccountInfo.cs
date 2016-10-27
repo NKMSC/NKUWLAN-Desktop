@@ -24,22 +24,7 @@
         {
             get
             {
-                if (flow < 1)
-                {
-                    //<1MB单位KB
-                    return (flow * 1024).ToString("G4") + "K";
-
-                }
-                else if (flow < 1000)
-                {
-                    //<1GB 单位用MB
-                    return flow.ToString("G4") + "M";
-                }
-                else
-                {
-                    //网关计费单位1G=1000M
-                    return (flow / 1000).ToString("G4") + "G";
-                }
+                return FromatFlow(flow);
             }
         }
 
@@ -59,35 +44,25 @@
         }
 
         /// <summary>
-        /// 剩余流量 单位MB 
-        /// </summary>
-        public double rflow;
-        /// <summary>
-        /// 流量格式化字符串，带单位
+        /// 剩余流量
         /// </summary>
         public string RFlow
         {
             get
             {
-                rflow = (flow < 5 * 1000) ? (500 * fee + 5 * 1000 - flow) : (500 * fee);
-                if (rflow < 1)
-                {
-                    //<1MB单位KB
-                    return (rflow * 1024).ToString("G4") + "K";
-                }
-                else if (rflow < 1000)
-                {
-                    //<1GB 单位用MB
-                    return rflow.ToString("G4") + "M";
-                }
-                else
-                {
-                    //网关计费单位1G=1000M
-                    return (rflow / 1000).ToString("G4") + "G";
-                }
+                double rflow = 500 * fee + 5 * 1000 - flow;
+                return FromatFlow(rflow);
             }
         }
 
+        public string FreeFlow
+        {
+            get
+            {
+                double free = 5000 - flow;
+                return FromatFlow(free);
+            }
+        }
         /// <summary>
         /// 时间 单位 min
         /// </summary>
@@ -162,10 +137,32 @@
             Uid = uid;
             this.flow = flow;
             this.fee = fee;
-            this.rflow = fee * 500;
             this.time = time;
             this.speed = 0;
             this.Ip = "";
+        }
+
+        public string FromatFlow(double Flow)
+        {
+            if (Flow <= 0)
+            {
+                return "0";
+            }
+            else if (Flow < 1)
+            {
+                //<1MB单位KB
+                return (Flow * 1024).ToString("G4") + "K";
+            }
+            else if (Flow < 1000)
+            {
+                //<1GB 单位用MB
+                return Flow.ToString("G4") + "M";
+            }
+            else
+            {
+                //网关计费单位1G=1000M
+                return (Flow / 1000).ToString("G4") + "G";
+            }
         }
     }
 }

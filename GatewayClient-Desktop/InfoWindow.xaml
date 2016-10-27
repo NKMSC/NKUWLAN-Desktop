@@ -24,11 +24,11 @@
         </DockPanel>
         <DockPanel Margin="6,78,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125" ToolTip="剩余流量">
             <Image Source="images/flow4.png" x:Name="rflow" Height="25" Width="25"/>
-            <TextBlock x:Name="RFlowText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="rflow"  Width="100" FontSize="18.667" Foreground="#FFA6DCFB" Height="20" FontWeight="Thin"/>
+            <TextBlock x:Name="RFlowText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="0.00K+0.00K"  Width="100" FontSize="18.667" Foreground="#FFA6DCFB" Height="20" FontWeight="Thin"/>
         </DockPanel>
-        <DockPanel Margin="130,78,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="125" ToolTip="当前余额">
+        <DockPanel Margin="130,78,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="135" ToolTip="当前余额">
             <Image Source="images/money.png" x:Name="time" Width="25" Height="25"/>
-            <TextBlock x:Name="FeeText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="fee"  Width="90" FontSize="18.667" Foreground="#FFFFD1B3" Height="20" FontWeight="Thin"/>
+            <TextBlock x:Name="FeeText" HorizontalAlignment="Left" Margin="5,0,0,0" TextWrapping="Wrap" Text="00.00元"  Width="90" FontSize="18.667" Foreground="#FFFFD1B3" Height="20" FontWeight="Thin"/>
         </DockPanel>
 
         <TextBlock x:Name="tipText" TextWrapping="Wrap" Margin="20,28,20,0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="11" Foreground="#FFD4D4D4" Height="13" Width="240" TextDecorations="{x:Null}" Text="每分钟刷新" FontWeight="Thin" TextAlignment="Center"/>

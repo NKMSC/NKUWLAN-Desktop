@@ -24,6 +24,7 @@ namespace Desktop_GUI
                 UIDText.Text = value.Uid;
                 UIDText.ToolTip = "本月累计使用：" + value.Time;
                 RFlowText.Text = value.RFlow;
+                RFlowText.ToolTip = "其中剩余免费流量"+value.FreeFlow;
                 FlowText.Text = value.Flow;
                 FeeText.Text = value.Fee;
                 SpeedText.Text = value.Speed;
